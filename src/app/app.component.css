@@ -1,23 +1,10 @@
-/* styles.css or styles.scss */
 
-/* Set up the layout for the full height of the viewport */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+
+  .dropdown-menu {
+    display: none; /* Hide dropdown by default */
   }
   
-  /* Ensure the main content area expands to fill available space */
-  router-outlet {
-    flex: 1;
-  }
-  
-  /* Style for the footer */
-  footer {
-    background-color: #343a40; /* Bootstrap bg-dark color */
-    color: #ffffff; /* Bootstrap text-white color */
-    text-align: center;
-    padding: 1rem; /* Equivalent to py-3 */
+  .dropdown-menu.show {
+    display: block; /* Show dropdown when .show class is added */
   }
   
