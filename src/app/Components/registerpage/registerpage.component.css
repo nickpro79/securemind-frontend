@@ -1,0 +1,15 @@
+.register-container {
+    max-width: 500px;
+    margin: auto;
+    padding-top: 50px;
+}
+.register-header {
+    margin-bottom: 30px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
