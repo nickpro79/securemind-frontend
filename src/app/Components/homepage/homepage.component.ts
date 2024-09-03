@@ -11,7 +11,7 @@ export class HomepageComponent {
   address: string = 'Palakkad'; // Address to search for
 
   // Default map center coordinates
-  defaultCenter: L.LatLngExpression = [10.914627, 75.922096]; // London as default
+  defaultCenter: L.LatLngExpression = [10.791828, 76.6516003]; // London as default
   zoom = 13; // Default zoom level
 
   ngOnInit(): void {

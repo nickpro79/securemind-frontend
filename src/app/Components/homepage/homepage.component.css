@@ -1,6 +1,5 @@
-/* home.component.css */
 .container{
-    padding-top: 60px;
+    padding-top: 10px;
 }
 .input-group .input-group-text {
     border-right: none;
@@ -17,7 +16,7 @@
   }
 
   .col-md-4{
-    padding-top: 20px;
+    padding-top: 80px;
   }
   .btn-primary {
     background-color: #6c757d;
