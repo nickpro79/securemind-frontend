@@ -1,0 +1,30 @@
+.container{
+    padding-top: 10px;
+}
+.input-group .input-group-text {
+    border-right: none;
+  }
+  
+  .form-control {
+    border-left: none;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(230, 236, 236);
+  }
+
+  .col-md-4{
+    padding-top: 80px;
+  }
+  .btn-primary {
+    background-color: #6c757d;
+    border-color: #dce2e7;
+  }
+  
+  .bg-light {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ddd;
+  }
+  
