@@ -4,14 +4,14 @@ import L from 'leaflet';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.css'
+  styleUrls: ['./homepage.component.css'] // Corrected from `styleUrl` to `styleUrls`
 })
 export class HomepageComponent {
   map!: L.Map; // Define the map variable
-  address: string = 'Palakkad'; // Address to search for
+  address: string = ''; // Address to search for, initialized as an empty string
 
   // Default map center coordinates
-  defaultCenter: L.LatLngExpression = [10.791828, 76.6516003]; // London as default
+  defaultCenter: L.LatLngExpression = [10.791828, 76.6516003]; // Initial center
   zoom = 13; // Default zoom level
 
   ngOnInit(): void {
@@ -48,6 +48,13 @@ export class HomepageComponent {
 
           // Center the map to the found location
           this.map.setView(latLng, this.zoom);
+
+          // Clear any existing markers
+          this.map.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+              this.map.removeLayer(layer);
+            }
+          });
 
           // Add a marker to the found location
           L.marker(latLng).addTo(this.map).bindPopup(this.address).openPopup();

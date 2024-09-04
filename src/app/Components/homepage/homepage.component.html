@@ -1,50 +1,46 @@
 <!-- home.component.html -->
 <div class="container mt-4">
-    <div class="row">
-      <!-- Left Section: Search and Map -->
-      <div class="col-md-8 mb-4">
-        <!-- Search Bar -->
-        <div class="input-group mb-3">
-          <span class="input-group-text bg-white" id="basic-addon1">
-            <i class="bi bi-search"></i>
-          </span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search Location..."
-            aria-label="Search Location"
-            aria-describedby="basic-addon1"
-          />
-        </div>
-  
-        <!-- Map Placeholder -->
-        <!-- <div class="bg-light p-5 text-center border rounded">
-          <i class="bi bi-image" style="font-size: 100px; color: #cccccc;"></i>
-          <p class="mt-3">Map or Location Image Placeholder</p>
-        </div> -->
-        <div id="map" style="height: 400px; width: 100%;" class="border rounded"></div>
+  <div class="row">
+    <!-- Left Section: Search and Map -->
+    <div class="col-md-8 mb-4">
+      <!-- Search Bar -->
+      <div class="input-group mb-3">
+        <span class="input-group-text bg-white" id="basic-addon1">
+          <i class="bi bi-search"></i>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search Location..."
+          aria-label="Search Location"
+          aria-describedby="basic-addon1"
+          [(ngModel)]="address"        
+          (keyup.enter)="searchLocation()" 
+        />
       </div>
-  
-      <!-- Right Section: Report Incidents -->
-      <div class="col-md-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title text-center">Report Incidents</h5>
-            <p class="card-text" style="text-align: justify;">
-              Be part of a movement for safer public spaces! Join with the people
-              who are sharing their experiences to make a real impact. Your input
-              helps us spot trends, advocate for better policies, and push for
-              improved safety measures. Plus, your information is always
-              anonymous. Together, we can create safer communities!
-            </p>
-            <div class="d-grid gap-2">
-              <button class="btn btn-primary btn-block">
-                Share Incident Anonymously
-              </button>
-            </div>
+
+      <div id="map" style="height: 400px; width: 100%;" class="border rounded"></div>
+    </div>
+
+    <!-- Right Section: Report Incidents -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-center">Report Incidents</h5>
+          <p class="card-text" style="text-align: justify;">
+            Be part of a movement for safer public spaces! Join with the people
+            who are sharing their experiences to make a real impact. Your input
+            helps us spot trends, advocate for better policies, and push for
+            improved safety measures. Plus, your information is always
+            anonymous. Together, we can create safer communities!
+          </p>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-block">
+              Share Incident Anonymously
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
