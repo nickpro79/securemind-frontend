@@ -4,14 +4,14 @@ import L from 'leaflet';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.css'
+  styleUrls: ['./homepage.component.css'] // Fix typo from `styleUrl` to `styleUrls`
 })
 export class HomepageComponent {
   map!: L.Map; // Define the map variable
   address: string = 'Palakkad'; // Address to search for
 
   // Default map center coordinates
-  defaultCenter: L.LatLngExpression = [10.791828, 76.6516003]; // London as default
+  defaultCenter: L.LatLngExpression = [10.791828, 76.6516003];
   zoom = 13; // Default zoom level
 
   ngOnInit(): void {
@@ -49,8 +49,19 @@ export class HomepageComponent {
           // Center the map to the found location
           this.map.setView(latLng, this.zoom);
 
-          // Add a marker to the found location
-          L.marker(latLng).addTo(this.map).bindPopup(this.address).openPopup();
+          // Define a custom icon
+          const customIcon = L.icon({
+            iconUrl: 'src\assets\custom-marker-icon.png', // Path to your custom icon image
+            iconSize: [25, 41], // Size of the icon (adjust as needed)
+            iconAnchor: [12, 41], // Anchor point of the icon (bottom center)
+            popupAnchor: [1, -34], // Point from which the popup should open relative to the iconAnchor
+          });
+
+          // Add a marker to the found location with the custom icon
+          L.marker(latLng, { icon: customIcon })
+            .addTo(this.map)
+            .bindPopup(this.address) // Bind a popup with the address
+            .openPopup(); // Open the popup automatically
         } else {
           alert('Location not found!'); // Alert if no location is found
         }
