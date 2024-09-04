@@ -9,6 +9,7 @@ import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.co
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { HospitalsNearMeComponent } from './Components/hospitals-near-me/hospitals-near-me.component';
 import { FormsModule } from '@angular/forms';
+import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     RegisterpageComponent,
     PagenotfoundComponent,
     HomepageComponent,
-    HospitalsNearMeComponent
+    HospitalsNearMeComponent,
+    PolicestationsNearMeComponent
   ],
   imports: [
     BrowserModule,
