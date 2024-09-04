@@ -1,0 +1,10 @@
+
+
+  .dropdown-menu {
+    display: none; /* Hide dropdown by default */
+  }
+  
+  .dropdown-menu.show {
+    display: block; /* Show dropdown when .show class is added */
+  }
+  

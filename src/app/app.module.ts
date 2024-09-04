@@ -7,7 +7,9 @@ import { LoginpageComponent } from './Components/loginpage/loginpage.component';
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
 import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
+import { HospitalsNearMeComponent } from './Components/hospitals-near-me/hospitals-near-me.component';
 import { FormsModule } from '@angular/forms';
+import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
 
 @NgModule({
   declarations: [
@@ -15,13 +17,14 @@ import { FormsModule } from '@angular/forms';
     LoginpageComponent,
     RegisterpageComponent,
     PagenotfoundComponent,
-    HomepageComponent
+    HomepageComponent,
+    HospitalsNearMeComponent,
+    PolicestationsNearMeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
