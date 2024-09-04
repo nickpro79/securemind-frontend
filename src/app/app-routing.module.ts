@@ -8,8 +8,8 @@ import { PolicestationsNearMeComponent } from './Components/policestations-near-
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomepageComponent },
+/*   { path: '', redirectTo: '/home', pathMatch: 'full' },
+ */  { path: 'home', component: HomepageComponent },
   {path:'hospitals-near-me',component:HospitalsNearMeComponent},
   {path:'police-stations-near-me', component:PolicestationsNearMeComponent},
   {path:'login', component:LoginpageComponent},
