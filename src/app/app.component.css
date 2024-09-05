@@ -7,4 +7,13 @@
   .dropdown-menu.show {
     display: block; /* Show dropdown when .show class is added */
   }
+  .nav-item{
+    font-family: "Archivo Black", sans-serif;
+    font-weight: lighter;
+    font-style: normal;
+    margin-left: 20px;
+  }
+  .btn{
+    margin-left: 20px;
+  }
   
