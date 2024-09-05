@@ -12,7 +12,7 @@ export class HomepageComponent {
 
   // Default map center coordinates
   defaultCenter: L.LatLngExpression = [10.791828, 76.6516003];
-  zoom = 13; // Default zoom level
+  zoom = 10; // Default zoom level
 
   ngOnInit(): void {
     this.initMap(); // Initialize the map on component load
@@ -31,36 +31,41 @@ export class HomepageComponent {
   }
 
   // Function to search and center the map to the input location
-  searchLocation() {
-    if (!this.address.trim()) return; // Do nothing if the address is empty
+  searchLocation(searchTerm: string): void {
+    if (!searchTerm.trim()) return; // Do nothing if the search term is empty
 
     // Use the Nominatim service for geocoding with OpenStreetMap data
     fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-        this.address
-      )}`
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}`
     )
       .then((response) => response.json()) // Convert the response to JSON
       .then((data) => {
         if (data && data.length > 0) {
           const location = data[0]; // Get the first search result
-          const latLng: L.LatLngExpression = [location.lat, location.lon]; // Convert to LatLng
+          const latLng: L.LatLngExpression = [parseFloat(location.lat), parseFloat(location.lon)]; // Convert to LatLng
 
           // Center the map to the found location
           this.map.setView(latLng, this.zoom);
 
-          // Define a custom icon
           const customIcon = L.icon({
-            iconUrl: 'src\assets\custom-marker-icon.png', // Path to your custom icon image
-            iconSize: [25, 41], // Size of the icon (adjust as needed)
-            iconAnchor: [12, 41], // Anchor point of the icon (bottom center)
-            popupAnchor: [1, -34], // Point from which the popup should open relative to the iconAnchor
+            iconUrl: '../assets/icon.svg', // Path to your custom icon image
+            iconSize: [32, 32], // Size of the icon (adjust as needed)
+            iconAnchor: [16, 32], // Anchor point of the icon (bottom center)
+            popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
+          });
+          
+
+          // Clear previous markers (optional)
+          this.map.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+              this.map.removeLayer(layer);
+            }
           });
 
           // Add a marker to the found location with the custom icon
           L.marker(latLng, { icon: customIcon })
             .addTo(this.map)
-            .bindPopup(this.address) // Bind a popup with the address
+            .bindPopup(searchTerm) // Bind a popup with the address
             .openPopup(); // Open the popup automatically
         } else {
           alert('Location not found!'); // Alert if no location is found
