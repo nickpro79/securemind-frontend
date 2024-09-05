@@ -1,20 +1,20 @@
 <div class="container login-container">
-    <div class="login-header text-center">
-        <h2>Please Login to Use our Resources</h2>
+    <div class="login-header">
+        <h2>Please Login to Access Our Resources</h2>
     </div>
     <form>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" #username placeholder="Enter your username">
+            <input type="text" class="form-control" id="username" placeholder="Enter your username">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" #password placeholder="Enter your password">
+            <input type="password" class="form-control" id="password" placeholder="Enter your password">
         </div>
-        <button type="button" class="btn btn-primary btn-block" (click)="Login(username,password)">Login</button>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
     </form>
     <div class="register-link">
-        <p>Don't have an account? <a routerLink="/register"> Register here</a></p>
+        <p>Don't have an account? <a routerLink="/register">Register here</a></p>
     </div>
 </div>
 <router-outlet></router-outlet>

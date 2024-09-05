@@ -1,15 +1,89 @@
+body {
+    background-color: #e9ecef; /* Light gray background for the page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
 .login-container {
     max-width: 400px;
-    margin: auto;
-    padding-top: 50px;
+    width: 100%;
+    background: #ffffff; /* White background for the form */
+    padding: 40px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
+
 .login-header {
-    margin-bottom: 30px; /* Increased spacing for header */
+    margin-bottom: 20px;
 }
+
+.login-header h2 {
+    font-size: 26px;
+    color: #333; /* Dark gray color for text */
+    font-weight: 700;
+    text-align: center;
+}
+
 .form-group {
-    margin-bottom: 20px; /* Space between form groups */
+    margin-bottom: 20px;
 }
+
+.form-group label {
+    font-size: 14px;
+    color: #555; /* Slightly lighter gray for labels */
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    height: 44px;
+    border-radius: 4px; /* Slightly rounded corners for input fields */
+    border: 1px solid #ced4da; /* Light border color */
+    padding: 0 15px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Bootstrap's primary color */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Focus shadow effect */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap's primary color */
+    border: none;
+    height: 44px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-1px); /* Subtle lift effect */
+}
+
 .register-link {
     text-align: center;
-    margin-top: 20px; /* Space above the register link */
+    margin-top: 20px;
+}
+
+.register-link p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }

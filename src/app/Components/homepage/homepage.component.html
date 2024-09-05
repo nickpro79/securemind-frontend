@@ -1,26 +1,23 @@
-<!-- home.component.html -->
 <div class="container mt-4">
-    <div class="row">
-      <!-- Left Section: Search and Map -->
-      <div class="col-md-8 mb-4">
-        <!-- Search Bar -->
-        <div class="input-group mb-3">
-          <span class="input-group-text bg-white" id="basic-addon1">
-            <i class="bi bi-search"></i>
-          </span>
-          <input #searchInput
-            type="text"
-            class="form-control"
-            placeholder="Search Location..."
-            aria-label="Search Location"
-            aria-describedby="basic-addon1"
-            (keyup.enter)="searchLocation(searchInput.value)" 
-          />
-          
-        </div>
-        <div id="map" style="height: 400px; width: 100%;" class="border rounded">
-        </div>
+  <div class="row">
+    <!-- Left Section: Search and Map -->
+    <div class="col-md-8 mb-4">
+      <div class="input-group mb-3">
+        <span class="input-group-text bg-white" id="basic-addon1">
+          <i class="bi bi-search"></i>
+        </span>
+        <input
+          #searchInput
+          type="text"
+          class="form-control"
+          placeholder="Search Location..."
+          aria-label="Search Location"
+          aria-describedby="basic-addon1"
+          (keyup.enter)="searchLocation(searchInput.value)"
+        />
       </div>
+      <div id="map" style="height: 400px; width: 100%;" class="border rounded"></div>
+    </div>
 
     <!-- Right Section: Report Incidents -->
     <div class="col-md-4">
@@ -35,7 +32,11 @@
             anonymous. Together, we can create safer communities!
           </p>
           <div class="d-grid gap-2">
-            <button class="btn btn-primary btn-block">
+            <!-- Button to open the modal -->
+            <button
+              class="btn btn-primary btn-block"
+              (click)="openModal()"
+            >
               Share Incident Anonymously
             </button>
           </div>
@@ -43,5 +44,80 @@
       </div>
     </div>
   </div>
+</div>
 
+<!-- Modal for Incident Form -->
+<div
+  class="modal fade"
+  id="incidentModal"
+  tabindex="-1"
+  aria-labelledby="incidentModalLabel"
+  aria-hidden="true"
+  [ngClass]="{'show': showModal}"
+  [ngStyle]="{'display': showModal ? 'block' : 'none'}"
+  (click)="onModalClick($event)"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="incidentModalLabel">Report Incident</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Incident Form inside the modal -->
+        <form [formGroup]="incidentForm" (ngSubmit)="submitForm()">
+          <div class="mb-3">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input
+              type="text"
+              class="form-control"
+              id="latitude"
+              formControlName="latitude"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="longitude" class="form-label">Longitude</label>
+            <input
+              type="text"
+              class="form-control"
+              id="longitude"
+              formControlName="longitude"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="incidentType" class="form-label">Incident Type</label>
+            <select
+              class="form-select"
+              id="incidentType"
+              formControlName="type"
+              required
+            >
+              <option value="" disabled>Select Incident Type</option>
+              <option value="Theft">Theft</option>
+              <option value="Vandalism">Vandalism</option>
+              <option value="Assault">Assault</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              formControlName="description"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
