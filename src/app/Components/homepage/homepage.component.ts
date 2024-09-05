@@ -48,11 +48,12 @@ export class HomepageComponent {
           this.map.setView(latLng, this.zoom);
 
           const customIcon = L.icon({
-            iconUrl: '../assets/flag.svg', // Path to your custom icon image
+            iconUrl: '../assets/icon.svg', // Path to your custom icon image
             iconSize: [32, 32], // Size of the icon (adjust as needed)
             iconAnchor: [16, 32], // Anchor point of the icon (bottom center)
             popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
           });
+          
 
           // Clear previous markers (optional)
           this.map.eachLayer((layer) => {
