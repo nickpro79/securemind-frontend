@@ -32,6 +32,7 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/assets/icon.svg",
+              "src/assets/circle-icon.svg",
               "src/favicon.ico",
               {
                 "glob": "**/*",

@@ -58,7 +58,7 @@ export class HomepageComponent implements OnInit {
             const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
             
             L.marker(latLng, { icon: L.icon({
-              iconUrl: 'assets/icon.svg', // Path to your red icon
+              iconUrl: 'assets/circle-icon.svg', // Path to your red icon
               iconSize: [25, 41],
               iconAnchor: [12, 41],
               popupAnchor: [1, -34],
