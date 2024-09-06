@@ -8,7 +8,7 @@ import { RegisterpageComponent } from './Components/registerpage/registerpage.co
 import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { HospitalsNearMeComponent } from './Components/hospitals-near-me/hospitals-near-me.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync()
