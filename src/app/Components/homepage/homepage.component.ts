@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import L from 'leaflet';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -7,15 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent {
   map!: L.Map;
   address: string = '';
   defaultCenter: L.LatLngExpression = [10.791828, 76.6516003];
-  zoom = 5;
+  zoom = 10;
   showModal = false;
   incidentForm: FormGroup;
-  incidentMarkers: L.Marker[] = []; // Store incident markers
-  searchMarker?: L.Marker; // Store the search result marker
 
   constructor(private fb: FormBuilder) {
     this.incidentForm = this.fb.group({
@@ -28,7 +27,6 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap();
-    this.loadIncidents(); // Load incidents when component initializes
   }
 
   private initMap(): void {
@@ -40,49 +38,12 @@ export class HomepageComponent implements OnInit {
     }).addTo(this.map);
   }
 
-  private loadIncidents(): void {
-    fetch('http://localhost:5240/api/CrimeIncidents')
-      .then(response => response.json())
-      .then(data => {
-        console.log('Fetched incidents:', data); // Log the response to check its structure
-
-        // Check if data has the $values property and it is an array
-        if (data && Array.isArray(data.$values)) {
-          const animatedIcon = L.divIcon({
-            className: 'pulse-icon',  // Apply the CSS class with animation
-            html: '<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff0000"/></svg>',
-            iconSize: [30, 30],
-            iconAnchor: [15, 30],
-          });
-          // Add markers for each incident
-          data.$values.forEach((incident: any) => {
-            const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
-            
-            const marker = L.marker(latLng, { icon: L.icon({
-              iconUrl: 'assets/circle-icon.svg', // Path to your red icon
-              iconSize: [25, 41],
-              iconAnchor: [12, 41],
-              popupAnchor: [1, -34],
-            }) })
-              .addTo(this.map)
-              .bindPopup(`<b>Incident:</b><br>${incident.description}`)
-              .openPopup();
-              
-            this.incidentMarkers.push(marker); // Store the marker
-          });
-        } else {
-          console.error('Expected an array of incidents but got:', data);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching incidents:', error);
-      });
-  }
-
   searchLocation(searchTerm: string): void {
     if (!searchTerm.trim()) return;
 
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}`)
+    fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}`
+    )
       .then(response => response.json())
       .then(data => {
         if (data && data.length > 0) {
@@ -91,12 +52,20 @@ export class HomepageComponent implements OnInit {
 
           this.map.setView(latLng, this.zoom);
 
-          // Remove the previous search marker if it exists
-          if (this.searchMarker) {
-            this.map.removeLayer(this.searchMarker);
-          }
+          const customIcon = L.icon({
+            iconUrl: '../assets/icon.svg',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32],
+          });
 
-          this.searchMarker = L.marker(latLng)
+          this.map.eachLayer(layer => {
+            if (layer instanceof L.Marker) {
+              this.map.removeLayer(layer);
+            }
+          });
+
+          L.marker(latLng, { icon: customIcon })
             .addTo(this.map)
             .bindPopup(searchTerm)
             .openPopup();

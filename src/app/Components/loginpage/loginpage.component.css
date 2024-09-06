@@ -1,15 +1,108 @@
+.container{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+body {
+    background-color: #f4f7f6; /* Light gray background for the page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .login-container {
     max-width: 400px;
-    margin: auto;
-    padding-top: 50px;
+    width: 100%;
+    background: #ffffff; /* White background for the form */
+    padding: 40px;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+    border: 1px solid #e1e5e9; /* Light border for separation */
+    transition: transform 0.3s, box-shadow 0.3s;
 }
+
+.login-container:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
 .login-header {
-    margin-bottom: 30px; /* Increased spacing for header */
+    margin-bottom: 30px;
+    text-align: center;
 }
+
+.login-header h2 {
+    font-size: 26px;
+    color: #2c3e50; /* Darker blue-gray color */
+    font-weight: 600;
+    margin: 0;
+}
+
 .form-group {
-    margin-bottom: 20px; /* Space between form groups */
+    margin-bottom: 20px;
 }
+
+.form-group label {
+    font-size: 14px;
+    color: #7f8c8d; /* Medium gray for labels */
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    height: 44px;
+    border-radius: 6px; /* Smooth rounded inputs */
+    border: 1px solid #ced4da;
+    padding: 0 15px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #3498db; /* Light blue border on focus */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.25); /* Focus shadow effect */
+    outline: none; /* Remove default outline */
+}
+
+.btn-primary {
+/*     display: block; /* Make button a block element */
+     margin: 20px auto 0; /* Center horizontally with auto margins */
+    background-color: #3498db; /* Light blue button */
+    border: none;
+    height: 44px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff; /* White text color */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
 .register-link {
     text-align: center;
-    margin-top: 20px; /* Space above the register link */
+    margin-top: 20px;
+}
+
+.register-link p {
+    margin: 0;
+    font-size: 14px;
+    color: #7f8c8d; /* Medium gray for text */
+}
+
+.register-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.register-link a:hover {
+    color: #2980b9; /* Darker blue on hover */
+    text-decoration: underline;
 }
