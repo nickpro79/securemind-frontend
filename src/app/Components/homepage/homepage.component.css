@@ -137,3 +137,7 @@ textarea.form-control {
   background-color: #218838; /* Darker green on hover */
   transform: translateY(-2px); /* Subtle lift effect */
 }
+
+.is-invalid {
+  border-color: red;
+}

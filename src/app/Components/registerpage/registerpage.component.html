@@ -2,24 +2,62 @@
     <div class="register-header text-center">
         <h2>Register</h2>
     </div>
-    <form>
+    <form [formGroup]="registerForm">
         <div class="form-group">
             <label for="name">Full Name</label>
-            <input type="text" class="form-control" #username placeholder="Enter your full name">
+            <input type="text"
+             class="form-control" 
+             #username
+             formControlName="username"
+             [class.is-invalid]="validateControl('username')" 
+             placeholder="Enter your full name">
+             <span class="text-danger" 
+             *ngIf="validateControlError('username','required')">Please Enter Username</span>
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" #email placeholder="Enter your email">
+            <input 
+            type="email" 
+            class="form-control" 
+            #email 
+            formControlName="email"
+            [class.is-invalid]="validateControl('email')"
+            placeholder="Enter your email">
+            <span class="text-danger" 
+            *ngIf="validateControlError('email','required')">Please Enter Email</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('email','email')">Please Enter Valid Email</span>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" #password placeholder="Enter your password">
+            <input
+            type="password" 
+            class="form-control" 
+            #password
+            formControlName="password" 
+            [class.is-invalid]="validateControlError('password','required')"
+            placeholder="Enter your password">
+            <span *ngIf="validateControlError('password', 'required')" class="text-danger">
+               Please Enter a password
+            </span>
+            <small *ngIf="validateControlError('password', 'passwordComplexity')">
+                Password must be 8+ characters long and include uppercase, lowercase, number, and special character.
+            </small>
         </div>
         <div class="form-group">
             <label for="confirm-password">Confirm Password</label>
-            <input type="password" class="form-control" #confirmpassword placeholder="Confirm your password">
+            <input 
+            type="password" 
+            class="form-control" 
+            #confirmpassword
+            formControlName="confirmpassword" 
+            [class.is-invalid]="validateControlError('confrimpassword','required')"
+            placeholder="Confirm your password">
+            <span class="text-danger" *ngIf="validateControlError('confirmpassword','passwordMismatch')">
+                Passwords should match
+            </span>
         </div>
-        <button type="button" class="btn btn-primary btn-block" (click)="RegisterButton(username.value,email.value,password.value,confirmpassword.value)">Register</button>
+        <button type="button" class="btn btn-primary btn-block" (click)="RegisterButton(username.value,email.value,password.value,confirmpassword.value)" [disabled]="!isFormValid">Register</button>
     </form>
     <div class="login-link">
         <p>Already have an account? <a routerLink="/login">Login here</a></p>
