@@ -14,6 +14,8 @@ export class HomepageComponent implements OnInit {
   zoom = 5;
   showModal = false;
   incidentForm: FormGroup;
+  incidentMarkers: L.Marker[] = []; // Store incident markers
+  searchMarker?: L.Marker; // Store the search result marker
 
   constructor(private fb: FormBuilder) {
     this.incidentForm = this.fb.group({
@@ -43,21 +45,20 @@ export class HomepageComponent implements OnInit {
       .then(response => response.json())
       .then(data => {
         console.log('Fetched incidents:', data); // Log the response to check its structure
-  
+
         // Check if data has the $values property and it is an array
         if (data && Array.isArray(data.$values)) {
-          // Clear existing markers
-          this.map.eachLayer(layer => {
-            if (layer instanceof L.Marker) {
-              this.map.removeLayer(layer);
-            }
+          const animatedIcon = L.divIcon({
+            className: 'pulse-icon',  // Apply the CSS class with animation
+            html: '<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff0000"/></svg>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
           });
-  
           // Add markers for each incident
           data.$values.forEach((incident: any) => {
             const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
             
-            L.marker(latLng, { icon: L.icon({
+            const marker = L.marker(latLng, { icon: L.icon({
               iconUrl: 'assets/circle-icon.svg', // Path to your red icon
               iconSize: [25, 41],
               iconAnchor: [12, 41],
@@ -66,6 +67,8 @@ export class HomepageComponent implements OnInit {
               .addTo(this.map)
               .bindPopup(`<b>Incident:</b><br>${incident.description}`)
               .openPopup();
+              
+            this.incidentMarkers.push(marker); // Store the marker
           });
         } else {
           console.error('Expected an array of incidents but got:', data);
@@ -75,8 +78,7 @@ export class HomepageComponent implements OnInit {
         console.error('Error fetching incidents:', error);
       });
   }
-  
-  
+
   searchLocation(searchTerm: string): void {
     if (!searchTerm.trim()) return;
 
@@ -89,13 +91,12 @@ export class HomepageComponent implements OnInit {
 
           this.map.setView(latLng, this.zoom);
 
-          this.map.eachLayer(layer => {
-            if (layer instanceof L.Marker) {
-              this.map.removeLayer(layer);
-            }
-          });
+          // Remove the previous search marker if it exists
+          if (this.searchMarker) {
+            this.map.removeLayer(this.searchMarker);
+          }
 
-          L.marker(latLng)
+          this.searchMarker = L.marker(latLng)
             .addTo(this.map)
             .bindPopup(searchTerm)
             .openPopup();
