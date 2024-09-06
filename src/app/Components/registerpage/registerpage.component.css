@@ -9,6 +9,8 @@ body {
 }
 
 .register-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
     max-width: 500px;
     width: 100%;
     background: #ffffff; /* White background for the form */
