@@ -105,3 +105,15 @@ body {
     color: #2980b9; /* Darker blue on hover */
     text-decoration: underline;
 }
+
+.is-invalid {
+    border-color: red;
+  }
+
+  .invalid-feedback {
+    display: block; 
+  }
+  .invalid-feedback span {
+    display: block; 
+    margin-top: 0.5px; /* Adds spacing between messages */
+  }

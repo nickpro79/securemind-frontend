@@ -45,3 +45,26 @@
 .pulse-icon {
   animation: pulse 2s infinite;
 }
+
+.btn-primary {
+  /*     display: block; /* Make button a block element */
+       margin: 20px auto 0; /* Center horizontally with auto margins */
+      background-color: #3498db; /* Light blue button */
+      border: none;
+      height: 44px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff; /* White text color */
+      transition: background-color 0.3s, transform 0.3s;
+  }
+  
+
+.btn-success:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.is-invalid {
+  border-color: red;
+}

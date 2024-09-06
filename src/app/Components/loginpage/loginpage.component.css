@@ -106,3 +106,7 @@ body {
     color: #2980b9; /* Darker blue on hover */
     text-decoration: underline;
 }
+
+.is-invalid {
+    border-color: red;
+  }

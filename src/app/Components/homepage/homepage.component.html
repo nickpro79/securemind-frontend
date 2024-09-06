@@ -78,8 +78,14 @@
               class="form-control"
               id="latitude"
               formControlName="latitude"
-              required
+              [class.is-invalid]="validateControl('latitude')"
             />
+            <span class="text-danger" 
+            *ngIf="validateControlError('latitude','required')">Please Enter Latitude</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('latitude','notInteger')">Please Enter an Integer</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('latitude','valueOutOfRange')">Value must be between -90 and 90</span>
           </div>
           <div class="mb-3">
             <label for="longitude" class="form-label">Longitude</label>
@@ -88,8 +94,14 @@
               class="form-control"
               id="longitude"
               formControlName="longitude"
-              required
+              [class.is-invalid]="validateControl('longitude')"
             />
+            <span class="text-danger" 
+            *ngIf="validateControlError('longitude','required')">Please Enter Longitude</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('longitude','notInteger')">Please Enter an Integer</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('longitude','valueOutOfRange')">Value must be between -180 and 180</span>
           </div>
           <div class="mb-3">
             <label for="incidentType" class="form-label">Incident Type</label>
@@ -97,13 +109,15 @@
               class="form-select"
               id="incidentType"
               formControlName="type"
-              required
+              [class.is-invalid]="validateControl('type')"
             >
               <option value="" disabled>Select Incident Type</option>
               <option value="Theft">Theft</option>
               <option value="Vandalism">Vandalism</option>
               <option value="Assault">Assault</option>
             </select>
+            <span class="text-danger" 
+            *ngIf="validateControlError('type','required')">Please Enter Type</span>
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -111,9 +125,11 @@
               class="form-control"
               id="description"
               formControlName="description"
+              [class.is-invalid]="validateControl('description')"
               rows="3"
-              required
             ></textarea>
+            <span class="text-danger" 
+            *ngIf="validateControlError('description','required')">Please Enter Description</span>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Report</button>
         </form>

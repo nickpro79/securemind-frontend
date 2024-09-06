@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators,ValidatorFn, AbstractControl } from '@angular/forms';
 import L from 'leaflet';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-homepage',
@@ -23,6 +23,8 @@ export class HomepageComponent implements OnInit {
       longitude: ['', Validators.required],
       type: ['', Validators.required],
       description: ['', Validators.required]
+    },{
+      validators:[this.latitudeValidator(),this.longitudeValidator()]
     });
   }
 
@@ -121,6 +123,8 @@ export class HomepageComponent implements OnInit {
     }
   }
 
+
+
   submitForm(): void {
     if (this.incidentForm.valid) {
       console.log('Incident submitted:', this.incidentForm.value);
@@ -130,4 +134,55 @@ export class HomepageComponent implements OnInit {
       console.log('Form is invalid');
     }
   }
+
+  validateControl(input:string){
+    return this.incidentForm.get(input)?.invalid &&
+    (this.incidentForm.get(input)?.touched || this.incidentForm.get(input)?.dirty)
+    }
+
+  validateControlError(input:string,errorType:string){
+      return this.incidentForm.get(input)?.hasError(errorType) &&
+      (this.incidentForm.get(input)?.touched || this.incidentForm.get(input)?.dirty)
+    }
+
+    longitudeValidator(): ValidatorFn {
+      return (formGroup: AbstractControl): { [key: string]: boolean } | null => {
+        const longitude = parseFloat(formGroup.get('longitude')?.value);
+        const error: { [key: string]: boolean } = {};
+        if(!Number.isInteger(longitude)){
+          error['notInteger']=true
+        }
+        if (longitude < -180 || longitude > 180) {
+          error['valueOutOfRange'] = true;
+        } 
+        if (Object.keys(error).length > 0) {
+          formGroup.get('longitude')?.setErrors(error);
+          return error;
+        } else {
+          formGroup.get('longitude')?.setErrors(null);
+          return null;
+        }
+      };
+      }
+
+
+latitudeValidator(): ValidatorFn {
+  return (formGroup: AbstractControl): { [key: string]: boolean } | null => {
+    const latitude = parseFloat(formGroup.get('latitude')?.value);
+        const error: { [key: string]: boolean } = {};
+        if(!Number.isInteger(latitude)){
+          error['notInteger']=true
+        }
+        if (latitude < -90 || latitude > 90) {
+          error['valueOutOfRange'] = true;
+        } 
+        if (Object.keys(error).length > 0) {
+          formGroup.get('latitude')?.setErrors(error);
+          return error;
+        } else {
+          formGroup.get('latitude')?.setErrors(null);
+          return null;
+        }
+}
+}
 }
