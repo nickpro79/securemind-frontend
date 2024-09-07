@@ -19,6 +19,8 @@ export class HospitalsNearMeComponent {
   ) {}
 
   searchLocation() {
+    this.errorMessage = '';
+    this.hospitals = [];
     if (!this.address.trim()) return;
 
     this.hospitalService.getCoordinates(this.address).pipe(
