@@ -5,7 +5,7 @@ import L from 'leaflet';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrl: './homepage.component.css'
 })
 export class HomepageComponent implements OnInit {
   map!: L.Map;
@@ -65,6 +65,7 @@ export class HomepageComponent implements OnInit {
               iconSize: [25, 41],
               iconAnchor: [12, 41],
               popupAnchor: [1, -34],
+              className: 'pulse-icon'
             }) })
               .addTo(this.map)
               .bindPopup(`<b>Incident:</b><br>${incident.description}`)
