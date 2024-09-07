@@ -1,44 +1,144 @@
-<!-- home.component.html -->
 <div class="container mt-4">
-    <div class="row">
-      <!-- Left Section: Search and Map -->
-      <div class="col-md-8 mb-4">
-        <!-- Search Bar -->
-        <div class="input-group mb-3">
-          <span class="input-group-text bg-white" id="basic-addon1">
-            <i class="bi bi-search"></i>
-          </span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search Location..."
-            aria-label="Search Location"
-            aria-describedby="basic-addon1"
-          />
-        </div>
-        <div id="map" style="height: 400px; width: 100%;" class="border rounded"></div>
+  <div class="row">
+    <!-- Left Section: Search and Map -->
+    <div class="col-md-8 mb-4">
+      <div class="input-group mb-3">
+        <span class="input-group-text bg-white" id="basic-addon1">
+          <i class="bi bi-search"></i>
+        </span>
+        <input
+          #searchInput
+          type="text"
+          class="form-control"
+          placeholder="Search Location..."
+          aria-label="Search Location"
+          aria-describedby="basic-addon1"
+          (keyup.enter)="searchLocation(searchInput.value)"
+        />
       </div>
-  
-      <!-- Right Section: Report Incidents -->
-      <div class="col-md-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title text-center">Report Incidents</h5>
-            <p class="card-text" style="text-align: justify;">
-              Be part of a movement for safer public spaces! Join with the people
-              who are sharing their experiences to make a real impact. Your input
-              helps us spot trends, advocate for better policies, and push for
-              improved safety measures. Plus, your information is always
-              anonymous. Together, we can create safer communities!
-            </p>
-            <div class="d-grid gap-2">
-              <button class="btn btn-primary btn-block">
-                Share Incident Anonymously
-              </button>
-            </div>
+      <div id="map" style="height: 400px; width: 100%;" class="border rounded"></div>
+    </div>
+
+    <!-- Right Section: Report Incidents -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-center">Report Incidents</h5>
+          <p class="card-text" style="text-align: justify;">
+            Be part of a movement for safer public spaces! Join with the people
+            who are sharing their experiences to make a real impact. Your input
+            helps us spot trends, advocate for better policies, and push for
+            improved safety measures. Plus, your information is always
+            anonymous. Together, we can create safer communities!
+          </p>
+          <div class="d-grid gap-2">
+            <!-- Button to open the modal -->
+            <button
+              class="btn btn-primary btn-block"
+              (click)="openModal()"
+            >
+              Share Incident Anonymously
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- Modal for Incident Form -->
+<div
+  class="modal fade"
+  id="incidentModal"
+  tabindex="-1"
+  aria-labelledby="incidentModalLabel"
+  aria-hidden="true"
+  [ngClass]="{'show': showModal}"
+  [ngStyle]="{'display': showModal ? 'block' : 'none'}"
+  (click)="onModalClick($event)"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="incidentModalLabel">Report Incident</h2>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Incident Form inside the modal -->
+        <form [formGroup]="incidentForm" (ngSubmit)="submitForm()">
+          <div class="mb-3">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input
+              type="text"
+              class="form-control"
+              id="latitude"
+              formControlName="latitude"
+              [class.is-invalid]="validateControl('latitude')"
+            />
+            <span class="text-danger" 
+            *ngIf="validateControlError('latitude','required')">Please Enter Latitude</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('latitude','notInteger')">Please Enter an Integer</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('latitude','valueOutOfRange')">Value must be between -90 and 90</span>
+          </div>
+          <div class="mb-3">
+            <label for="longitude" class="form-label">Longitude</label>
+            <input
+              type="text"
+              class="form-control"
+              id="longitude"
+              formControlName="longitude"
+              [class.is-invalid]="validateControl('longitude')"
+            />
+            <span class="text-danger" 
+            *ngIf="validateControlError('longitude','required')">Please Enter Longitude</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('longitude','notInteger')">Please Enter an Integer</span>
+            <span class="text-danger" 
+            *ngIf="validateControlError('longitude','valueOutOfRange')">Value must be between -180 and 180</span>
+          </div>
+          <div class="mb-3">
+            <label for="incidentType" class="form-label">Incident Type</label>
+            <select
+              class="form-select"
+              id="incidentType"
+              formControlName="type"
+              [class.is-invalid]="validateControl('type')"
+            >
+              <option value="" disabled>Select Incident Type</option>
+              <option value="Theft">Theft</option>
+              <option value="Vandalism">Vandalism</option>
+              <option value="Assault">Assault</option>
+            </select>
+            <span class="text-danger" 
+            *ngIf="validateControlError('type','required')">Please Enter Type</span>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              formControlName="description"
+              [class.is-invalid]="validateControl('description')"
+              rows="3"
+            ></textarea>
+            <span class="text-danger" 
+            *ngIf="validateControlError('description','required')">Please Enter Description</span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Report</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-4">
+    <svg class="pulse-icon" xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="#ff0000"/>
+    </svg>
+  </div>
+</div>

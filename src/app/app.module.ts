@@ -6,10 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginpageComponent } from './Components/loginpage/loginpage.component';
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
 import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { HospitalsNearMeComponent } from './Components/hospitals-near-me/hospitals-near-me.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
+import { ArticlesComponent } from './Components/articles/articles.component';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async'
+import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
   declarations: [
@@ -19,14 +23,20 @@ import { PolicestationsNearMeComponent } from './Components/policestations-near-
     PagenotfoundComponent,
     HomepageComponent,
     HospitalsNearMeComponent,
-    PolicestationsNearMeComponent
+    PolicestationsNearMeComponent,
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    HttpClientModule,
+    FormsModule,
+    MatIconModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

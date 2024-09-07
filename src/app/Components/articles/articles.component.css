@@ -1,0 +1,19 @@
+/* articles.component.css */
+.container{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-img-top {
+    height: 180px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensures the image covers the space without distortion */
+  }
+  

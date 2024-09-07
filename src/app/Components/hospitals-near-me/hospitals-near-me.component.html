@@ -1,19 +1,32 @@
 <div class="container text-center my-5">
-    <h1>Find your Nearest Hospitals</h1>
-    <form class="mt-4">
-      <div class="input-group">
-        <span class="input-group-text">
-          <i class="bi bi-search"></i> <!-- Bootstrap icon for search -->
-        </span>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter the location"
-          [(ngModel)]="address"
-          name="address"
-          (keyup.enter)="searchLocation()"
-        />
+  <h1>Find Your Nearest Hospitals</h1>
+  <form class="mt-4">
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter the location"
+        [(ngModel)]="address"
+        name="address"
+        (keyup.enter)="searchLocation()"
+      />
+    </div>
+  </form>
+  <div  *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div class="card-container" *ngIf="hospitals.length > 0">
+    <div class="card" *ngFor="let hospital of hospitals">
+      <div class="card-body">
+        <h5 class="card-title">{{ hospital.name }}</h5>
+        <p class="card-address">Address: {{ hospital.address }}</p>
+        <p class="card-phone">Phone: {{ hospital.phone }}</p>
+        <button class="card-button">View Details</button>
       </div>
-    </form>
+    </div>
   </div>
-  
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+</div>
