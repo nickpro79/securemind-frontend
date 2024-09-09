@@ -128,13 +128,44 @@ export class HomepageComponent implements OnInit {
 
   submitForm(): void {
     if (this.incidentForm.valid) {
-      console.log('Incident submitted:', this.incidentForm.value);
-      this.incidentForm.reset();
-      this.closeModal();
+      // Collect form data
+      const formData = this.incidentForm.value;
+  
+      // Send data to the backend using fetch
+      fetch('http://localhost:5240/api/Report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(async (response) => {
+        // Log the full response to understand the error
+        const result = await response.json();
+        console.log('Server response:', response.status, result);
+          if (!response.ok) {
+            // Handle error response
+            throw new Error('Failed to submit the incident report.');
+          }
+          return response.json();
+        })
+        .then(result => {
+          console.log('Incident submitted successfully:', result);
+          alert('Report submitted successfully!');
+          this.incidentForm.reset();
+          this.closeModal();
+        })
+        .catch(error => {
+          console.error('Error submitting report:', error);
+          alert('There was an error submitting your report. Please try again.');
+        });
     } else {
       console.log('Form is invalid');
+      // Trigger validation messages
+      this.incidentForm.markAllAsTouched();
     }
   }
+  
 
   validateControl(input:string){
     return this.incidentForm.get(input)?.invalid &&
