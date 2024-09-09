@@ -6,6 +6,7 @@ import { HospitalsNearMeComponent } from './Components/hospitals-near-me/hospita
 import { LoginpageComponent } from './Components/loginpage/loginpage.component';
 import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.component';
 import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
+import { QuestionnaireComponent } from './Components/questionnaire/questionnaire.component';
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
 import { AuthGuard } from './services/auth-guard.service';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'login', component:LoginpageComponent},
   {path:'register',component:RegisterpageComponent},
   {path:'articles', component:ArticlesComponent},
+  { path: 'counsellors', component: QuestionnaireComponent },
   {path:'**',component:PagenotfoundComponent}
   
 ];
