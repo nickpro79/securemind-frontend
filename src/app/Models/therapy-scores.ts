@@ -26,4 +26,9 @@ export enum TherapyExpectations {
     Exploring = 120,
     Other = 130,
   }
-  
+  export interface Counsellor {
+    name: string;
+    specialization: string;
+    contactInfo: string;
+  }
+    

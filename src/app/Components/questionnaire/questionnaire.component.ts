@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TherapyExpectations, TherapyReasons } from '../../Models/therapy-scores';
+import { Counsellor, TherapyExpectations, TherapyReasons } from '../../Models/therapy-scores';
 import { CounsellorService } from '../../services/counsellor.service';
 
 @Component({
@@ -8,6 +8,13 @@ import { CounsellorService } from '../../services/counsellor.service';
   styleUrl: './questionnaire.component.css'
 })
 export class QuestionnaireComponent {
+  formVisible: boolean = false; // Initially false to show only the welcome message
+
+  // Method to show the form and hide the welcome message
+  showForm() {
+    this.formVisible = true; // Set formVisible to true when "Get Started" is clicked
+  }
+
   expectationsScore: number = 0;
   reasonsScore: number = 0;
   totalScore: number = 0;
@@ -32,6 +39,7 @@ export class QuestionnaireComponent {
   }
 
   determineSpecialization() {
+    console.log('Determining specialization with total score:', this.totalScore);  // Debugging line
     if (this.totalScore <= 50) {
       this.specialization = 'Mental Health Counselor';
     } else if (this.totalScore <= 100) {
@@ -47,12 +55,12 @@ export class QuestionnaireComponent {
       .subscribe(
         data => {
           this.counsellors = data;
-          console.log(this.counsellors)
+          console.log(this.counsellors);
         },
         error => {
           this.error = 'Error fetching counsellors';
           console.error('Error fetching counsellors:', error);
         }
       );
-  }
+  } 
 }

@@ -1,24 +1,36 @@
-<form>
+<!-- Welcome message section, shown only when formVisible is false -->
+<h2  class="heading" >Talk to Top Rated Counselors Online</h2>
+<div *ngIf="!formVisible" class="welcome-container">
+  <p>
+    Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
+    Master's Degrees and hours of intensive training, are ready to help you conquer life's challenges. Join over
+    500,000 clients who've thrived with our expert support!
+  </p>
+  <button class="get-started-btn" (click)="showForm()">Get Started</button>
+  <img src="assets/welcome.png" alt="Counseling Support" class="welcome-image" />
+</div>
+
+<!-- Form section, shown only when formVisible is true -->
+<form *ngIf="formVisible" class="counselor-form">
   <h3>What are your expectations from your therapist?</h3>
   <label><input type="radio" name="expectations" (change)="onExpectationsChange('Listens')"> Listens</label>
   <label><input type="radio" name="expectations" (change)="onExpectationsChange('ExploresPast')"> Explores my past</label>
   <label><input type="radio" name="expectations" (change)="onExpectationsChange('TeachesSkills')"> Teaches me new skills</label>
-  <!-- Add more options as needed -->
 
   <h3>What led you to consider therapy today?</h3>
   <label><input type="radio" name="reasons" (change)="onReasonsChange('Depressed')"> I've been feeling depressed</label>
   <label><input type="radio" name="reasons" (change)="onReasonsChange('Anxious')"> I feel anxious or overwhelmed</label>
   <label><input type="radio" name="reasons" (change)="onReasonsChange('JobPerformance')"> My mood is interfering with my job/school performance</label>
-  <!-- Add more options as needed -->
 
   <button type="button" (click)="determineSpecialization()">Find Counsellors</button>
 </form>
 
-<div *ngIf="error">{{ error }}</div>
 
-<div *ngIf="counsellors.length">
+<div *ngIf="error" class="error-message">{{ error }}</div>
+
+<div *ngIf="counsellors.length!==0">
   <h3>Recommended Counsellors:</h3>
-  <ul>
+  <ul class="counsellors-list">
     <li *ngFor="let counsellor of counsellors">
       <strong>Name:</strong> {{ counsellor.name }}<br>
       <strong>Specialization:</strong> {{ counsellor.specialization }}<br>
