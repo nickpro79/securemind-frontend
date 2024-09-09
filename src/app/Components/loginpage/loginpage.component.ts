@@ -39,7 +39,10 @@ ngOnInit(): void {
     this.data.password = password.value
     this._userservice.Login(this.data)
     .subscribe({
-     next:(response)=>{console.log(response)},
+     next:(response)=>{
+      console.log(response)
+      this._userservice.isAuthenticated=true
+    },
      error:(err)=>{console.log(err)}
     })
   }

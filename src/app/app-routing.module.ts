@@ -6,6 +6,7 @@ import { LoginpageComponent } from './Components/loginpage/loginpage.component';
 import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.component';
 import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
