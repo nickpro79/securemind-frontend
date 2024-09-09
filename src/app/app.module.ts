@@ -13,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
 import { ArticlesComponent } from './Components/articles/articles.component';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async'
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule} from '@angular/material/icon';
+import { QuestionnaireComponent } from './Components/questionnaire/questionnaire.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatIconModule} from '@angular/material/icon'
     HomepageComponent,
     HospitalsNearMeComponent,
     PolicestationsNearMeComponent,
-    ArticlesComponent
+    ArticlesComponent,
+    QuestionnaireComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,28 @@
+<form>
+  <h3>What are your expectations from your therapist?</h3>
+  <label><input type="radio" name="expectations" (change)="onExpectationsChange('Listens')"> Listens</label>
+  <label><input type="radio" name="expectations" (change)="onExpectationsChange('ExploresPast')"> Explores my past</label>
+  <label><input type="radio" name="expectations" (change)="onExpectationsChange('TeachesSkills')"> Teaches me new skills</label>
+  <!-- Add more options as needed -->
+
+  <h3>What led you to consider therapy today?</h3>
+  <label><input type="radio" name="reasons" (change)="onReasonsChange('Depressed')"> I've been feeling depressed</label>
+  <label><input type="radio" name="reasons" (change)="onReasonsChange('Anxious')"> I feel anxious or overwhelmed</label>
+  <label><input type="radio" name="reasons" (change)="onReasonsChange('JobPerformance')"> My mood is interfering with my job/school performance</label>
+  <!-- Add more options as needed -->
+
+  <button type="button" (click)="determineSpecialization()">Find Counsellors</button>
+</form>
+
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="counsellors.length">
+  <h3>Recommended Counsellors:</h3>
+  <ul>
+    <li *ngFor="let counsellor of counsellors">
+      <strong>Name:</strong> {{ counsellor.name }}<br>
+      <strong>Specialization:</strong> {{ counsellor.specialization }}<br>
+      <strong>Contact Info:</strong> {{ counsellor.contactInfo }}
+    </li>
+  </ul>
+</div>
