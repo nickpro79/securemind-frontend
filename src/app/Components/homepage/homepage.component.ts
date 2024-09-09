@@ -257,8 +257,7 @@ latitudeValidator(): ValidatorFn {
         const error: { [key: string]: boolean } = {};
         if (isNaN(latitude)) {
           error['notANumber'] = true;
-        } 
-       
+        }
         if (latitude < -90 || latitude > 90) {
           error['valueOutOfRange'] = true;
         } 
