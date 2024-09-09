@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,ValidatorFn, AbstractControl } from '@angular/forms';
 import L from 'leaflet';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-homepage',
@@ -139,8 +139,8 @@ latitudeValidator(): ValidatorFn {
   return (formGroup: AbstractControl): { [key: string]: boolean } | null => {
     const latitude = parseFloat(formGroup.get('latitude')?.value);
         const error: { [key: string]: boolean } = {};
-        if(!Number.isInteger(latitude)){
-          error['notInteger']=true
+        if (isNaN(latitude)) {
+          error['notANumber'] = true;
         }
         if (latitude < -90 || latitude > 90) {
           error['valueOutOfRange'] = true;
