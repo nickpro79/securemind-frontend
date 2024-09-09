@@ -83,7 +83,7 @@
             <span class="text-danger" 
             *ngIf="validateControlError('latitude','required')">Please Enter Latitude</span>
             <span class="text-danger" 
-            *ngIf="validateControlError('latitude','notInteger')">Please Enter an Integer</span>
+            *ngIf="validateControlError('latitude','notANumber')">Please Enter an Integer</span>
             <span class="text-danger" 
             *ngIf="validateControlError('latitude','valueOutOfRange')">Value must be between -90 and 90</span>
           </div>
@@ -99,7 +99,7 @@
             <span class="text-danger" 
             *ngIf="validateControlError('longitude','required')">Please Enter Longitude</span>
             <span class="text-danger" 
-            *ngIf="validateControlError('longitude','notInteger')">Please Enter an Integer</span>
+            *ngIf="validateControlError('longitude','notANumber')">Please Enter an Integer</span>
             <span class="text-danger" 
             *ngIf="validateControlError('longitude','valueOutOfRange')">Value must be between -180 and 180</span>
           </div>

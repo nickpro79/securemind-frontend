@@ -181,9 +181,9 @@ export class HomepageComponent implements OnInit {
       return (formGroup: AbstractControl): { [key: string]: boolean } | null => {
         const longitude = parseFloat(formGroup.get('longitude')?.value);
         const error: { [key: string]: boolean } = {};
-        if(!Number.isInteger(longitude)){
-          error['notInteger']=true
-        }
+        if (isNaN(longitude)) {
+          error['notANumber'] = true;
+        }  
         if (longitude < -180 || longitude > 180) {
           error['valueOutOfRange'] = true;
         } 
