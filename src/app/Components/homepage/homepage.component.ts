@@ -82,10 +82,10 @@ export class HomepageComponent implements OnInit {
         console.error('Error fetching incidents:', error);
       });
 
-      fetch('http://localhost:5240/api/CrimeIncidents')
+      fetch('http://localhost:5240/api/report')
       .then(response => response.json())
       .then(data => {
-        console.log('Fetched incidents:', data); // Log the response to check its structure
+        console.log('Fetched reports:', data); // Log the response to check its structure
 
         // Check if data has the $values property and it is an array
         if (data && Array.isArray(data.$values)) {
