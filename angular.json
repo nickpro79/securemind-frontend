@@ -33,7 +33,7 @@
             "assets": [
               "src/assets/icon.svg",
               "src/assets/circle-icon.svg",
-              "src/assets/welocome.png",
+              "src/assets/welcome.png",
               "src/favicon.ico",
               {
                 "glob": "**/*",
