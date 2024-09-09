@@ -22,7 +22,8 @@ export class HomepageComponent implements OnInit {
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       type: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      Location: ['']
     },{
       validators:[this.latitudeValidator(),this.longitudeValidator()]
     });
@@ -128,7 +129,18 @@ export class HomepageComponent implements OnInit {
 
   submitForm(): void {
     if (this.incidentForm.valid) {
-      const formData = this.incidentForm.value;
+      const formData = {
+        latitude: this.incidentForm.value.latitude,
+        longitude: this.incidentForm.value.longitude,
+        type: this.incidentForm.value.type,
+        description: this.incidentForm.value.description,
+        Location: {
+          Latitude: this.incidentForm.value.latitude,
+          Longitude: this.incidentForm.value.longitude
+        },
+        ReportTime: new Date().toISOString() // Or any other relevant date/time
+      };
+      
   
       fetch('http://localhost:5240/api/Report', {
         method: 'POST',
@@ -137,30 +149,38 @@ export class HomepageComponent implements OnInit {
         },
         body: JSON.stringify(formData),
       })
-        .then(async (response) => {
-          const result = await response.json();
-          console.log('Server response:', response.status, result);
+      .then(async (response) => {
+        const result = await response.json();
+        console.log('Server response:', response.status, result);
   
-          if (!response.ok) {
-            // Log specific validation errors if available
-            console.error('Validation errors:', result.errors);
-            throw new Error(result.title || 'Failed to submit the incident report.');
+        if (!response.ok) {
+          // Log specific validation errors if available
+          console.error('Validation errors:', result.errors);
+          if (result.errors && result.errors['Location']) {
+            console.error('Location validation error:', result.errors['Location']);
           }
+          if (result.errors && result.errors['report']) {
+            console.error('Report validation error:', result.errors['report']);
+          }
+          throw new Error(result.title || 'Failed to submit the incident report.');
+        }
   
-          alert('Report submitted successfully!');
-          this.incidentForm.reset();
-          this.closeModal();
-        })
-        .catch((error) => {
-          console.error('Error submitting report:', error);
-          alert('There was an error submitting your report. Please try again.');
-        });
+        alert('Report submitted successfully!');
+        this.incidentForm.reset();
+        this.closeModal();
+      })
+      .catch((error) => {
+        console.error('Error submitting report:', error);
+        alert('There was an error submitting your report. Please try again.');
+      });
     } else {
       console.log('Form is invalid');
       this.incidentForm.markAllAsTouched();
     }
   }
-
+  
+  
+  
   validateControl(input:string){
     return this.incidentForm.get(input)?.invalid &&
     (this.incidentForm.get(input)?.touched || this.incidentForm.get(input)?.dirty)
