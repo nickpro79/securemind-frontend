@@ -1,27 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,ValidatorFn, AbstractControl } from '@angular/forms';
 import L from 'leaflet';
-
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrl: './homepage.component.css'
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   map!: L.Map;
   address: string = '';
   defaultCenter: L.LatLngExpression = [10.791828, 76.6516003];
-  zoom = 10;
+  zoom = 5;
   showModal = false;
   incidentForm: FormGroup;
+  incidentMarkers: L.Marker[] = []; // Store incident markers
+  searchMarker?: L.Marker; // Store the search result marker
 
   constructor(private fb: FormBuilder) {
     this.incidentForm = this.fb.group({
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       type: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      Location: ['']
     },{
       validators:[this.latitudeValidator(),this.longitudeValidator()]
     });
@@ -29,6 +31,7 @@ export class HomepageComponent {
 
   ngOnInit(): void {
     this.initMap();
+    this.loadIncidents(); // Load incidents when component initializes
   }
 
   private initMap(): void {
@@ -40,12 +43,89 @@ export class HomepageComponent {
     }).addTo(this.map);
   }
 
+  private loadIncidents(): void {
+    fetch('http://localhost:5240/api/CrimeIncidents')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched incidents:', data); // Log the response to check its structure
+
+        // Check if data has the $values property and it is an array
+        if (data && Array.isArray(data.$values)) {
+          const animatedIcon = L.divIcon({
+            className: 'pulse-icon',  // Apply the CSS class with animation
+            html: '<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff0000"/></svg>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
+          });
+          // Add markers for each incident
+          data.$values.forEach((incident: any) => {
+            const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
+            
+            const marker = L.marker(latLng, { icon: L.icon({
+              iconUrl: 'assets/circle-icon.svg', // Path to your red icon
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              className: 'pulse-icon'
+            }) })
+              .addTo(this.map)
+              .bindPopup(`<b>Incident:</b><br>${incident.description}`)
+              .openPopup();
+              
+            this.incidentMarkers.push(marker); // Store the marker
+          });
+        } else {
+          console.error('Expected an array of incidents but got:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching incidents:', error);
+      });
+
+      fetch('http://localhost:5240/api/report')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched reports:', data); // Log the response to check its structure
+
+        // Check if data has the $values property and it is an array
+        if (data && Array.isArray(data.$values)) {
+          const animatedIcon = L.divIcon({
+            className: 'pulse-icon',  // Apply the CSS class with animation
+            html: '<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff0000"/></svg>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
+          });
+          // Add markers for each incident
+          data.$values.forEach((incident: any) => {
+            const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
+            
+            const marker = L.marker(latLng, { icon: L.icon({
+              iconUrl: 'assets/circle-icon.svg', // Path to your red icon
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              className: 'pulse-icon'
+            }) })
+              .addTo(this.map)
+              .bindPopup(`<b>Incident:</b><br>${incident.description}`)
+              .openPopup();
+              
+            this.incidentMarkers.push(marker); // Store the marker
+          });
+        } else {
+          console.error('Expected an array of incidents but got:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching incidents:', error);
+      });
+      
+  }
+
   searchLocation(searchTerm: string): void {
     if (!searchTerm.trim()) return;
 
-    fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}`
-    )
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}`)
       .then(response => response.json())
       .then(data => {
         if (data && data.length > 0) {
@@ -54,20 +134,12 @@ export class HomepageComponent {
 
           this.map.setView(latLng, this.zoom);
 
-          const customIcon = L.icon({
-            iconUrl: '../assets/icon.svg',
-            iconSize: [32, 32],
-            iconAnchor: [16, 32],
-            popupAnchor: [0, -32],
-          });
+          // Remove the previous search marker if it exists
+          if (this.searchMarker) {
+            this.map.removeLayer(this.searchMarker);
+          }
 
-          this.map.eachLayer(layer => {
-            if (layer instanceof L.Marker) {
-              this.map.removeLayer(layer);
-            }
-          });
-
-          L.marker(latLng, { icon: customIcon })
+          this.searchMarker = L.marker(latLng)
             .addTo(this.map)
             .bindPopup(searchTerm)
             .openPopup();
@@ -96,14 +168,58 @@ export class HomepageComponent {
 
   submitForm(): void {
     if (this.incidentForm.valid) {
-      console.log('Incident submitted:', this.incidentForm.value);
-      this.incidentForm.reset();
-      this.closeModal();
+      const formData = {
+        latitude: this.incidentForm.value.latitude,
+        longitude: this.incidentForm.value.longitude,
+        type: this.incidentForm.value.type,
+        description: this.incidentForm.value.description,
+        Location: {
+          Latitude: this.incidentForm.value.latitude,
+          Longitude: this.incidentForm.value.longitude
+        },
+        ReportTime: new Date().toISOString() // Or any other relevant date/time
+      };
+      
+  
+      fetch('http://localhost:5240/api/Report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      .then(async (response) => {
+        const result = await response.json();
+        console.log('Server response:', response.status, result);
+  
+        if (!response.ok) {
+          // Log specific validation errors if available
+          console.error('Validation errors:', result.errors);
+          if (result.errors && result.errors['Location']) {
+            console.error('Location validation error:', result.errors['Location']);
+          }
+          if (result.errors && result.errors['report']) {
+            console.error('Report validation error:', result.errors['report']);
+          }
+          throw new Error(result.title || 'Failed to submit the incident report.');
+        }
+  
+        alert('Report submitted successfully!');
+        this.incidentForm.reset();
+        this.closeModal();
+      })
+      .catch((error) => {
+        console.error('Error submitting report:', error);
+        alert('There was an error submitting your report. Please try again.');
+      });
     } else {
       console.log('Form is invalid');
+      this.incidentForm.markAllAsTouched();
     }
   }
-
+  
+  
+  
   validateControl(input:string){
     return this.incidentForm.get(input)?.invalid &&
     (this.incidentForm.get(input)?.touched || this.incidentForm.get(input)?.dirty)

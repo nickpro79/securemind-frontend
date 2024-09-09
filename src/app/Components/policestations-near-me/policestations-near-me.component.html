@@ -15,5 +15,13 @@
         />
       </div>
     </form>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div class="card-container" *ngIf="policeStations.length > 0">
+    <div *ngFor="let station of policeStations" class="card">
+      <h4 class="card-title">{{ station.name }}</h4>
+      <p class="card-address">{{ station.address }}</p>
+    </div>
+  </div>
   </div>
   
