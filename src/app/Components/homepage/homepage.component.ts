@@ -81,6 +81,45 @@ export class HomepageComponent implements OnInit {
       .catch(error => {
         console.error('Error fetching incidents:', error);
       });
+
+      fetch('http://localhost:5240/api/CrimeIncidents')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched incidents:', data); // Log the response to check its structure
+
+        // Check if data has the $values property and it is an array
+        if (data && Array.isArray(data.$values)) {
+          const animatedIcon = L.divIcon({
+            className: 'pulse-icon',  // Apply the CSS class with animation
+            html: '<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff0000"/></svg>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
+          });
+          // Add markers for each incident
+          data.$values.forEach((incident: any) => {
+            const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
+            
+            const marker = L.marker(latLng, { icon: L.icon({
+              iconUrl: 'assets/circle-icon.svg', // Path to your red icon
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              className: 'pulse-icon'
+            }) })
+              .addTo(this.map)
+              .bindPopup(`<b>Incident:</b><br>${incident.description}`)
+              .openPopup();
+              
+            this.incidentMarkers.push(marker); // Store the marker
+          });
+        } else {
+          console.error('Expected an array of incidents but got:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching incidents:', error);
+      });
+      
   }
 
   searchLocation(searchTerm: string): void {
