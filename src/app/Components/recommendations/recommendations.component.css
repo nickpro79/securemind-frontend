@@ -1,8 +1,9 @@
 /* Main title for the section */
 .section-title {
+    margin-top: 40px;
+    margin-bottom: 40px;
     text-align: center;
     font-size: 2rem;
-    margin: 20px 0;
     color: #333;
     font-weight: bold;
   }
@@ -22,7 +23,7 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    margin-bottom: 200px;
+    margin-bottom: 150px;
   }
   
   /* Each counselor card styling */

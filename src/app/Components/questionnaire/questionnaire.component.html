@@ -35,7 +35,7 @@
       <!-- Step 2: Age -->
       <div *ngSwitchCase="1" class="age-section">
         <h3 class="step-heading">How old are you?</h3>
-        <select id="age" class="styled-select" (change)="onAgeChange($event)">
+        <select  id="age" class="styled-select" (change)="onAgeChange($event)">
           <option *ngFor="let age of ages" [value]="age">{{ age }}</option>
         </select>
       </div>
