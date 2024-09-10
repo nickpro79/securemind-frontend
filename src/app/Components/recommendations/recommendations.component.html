@@ -1,0 +1,11 @@
+<h2>Recommended Counselors </h2>
+<div *ngIf="counselors.length === 0">
+  <p>No counselors available for the selected specialization.</p>
+</div>
+<ul>
+    <li *ngFor="let counsellor of counselors">
+        <strong>Name:</strong> {{ counsellor.name }}<br>
+        <strong>Specialization:</strong> {{ counsellor.specialization }}<br>
+        <strong>Contact Info:</strong> {{ counsellor.contactInfo }}<br>
+      </li>
+</ul>

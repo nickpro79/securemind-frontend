@@ -1,22 +1,5 @@
-<!-- Welcome message section, shown only when formVisible is false -->
-<!-- <h2  class="heading" >Talk to Top Rated Counselors Online</h2>
-<div *ngIf="!formVisible" class="welcome-container">
-  <div>
-    <p>
-      Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
-      Master's Degrees and hours of intensive training, are ready to help you conquer life's challenges. Join over
-      500,000 clients who've thrived with our expert support!
-    </p>
-  </div>
-  <div class="button-container">
-    <button class="get-started-btn" (click)="showForm()">Get Started</button>
-  </div>
-  <img src="assets/welcome.png"  class="welcome-image" />
-</div> -->
-<!-- welcome.component.html -->
 <h2 class="heading">Talk to Top Rated Counselors Online</h2>
 <div *ngIf="!formVisible" class="welcome-container">
-  <!-- Left Column -->
   <div class="left-column">
     <p>
       Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
@@ -27,17 +10,13 @@
       <button class="get-started-btn" (click)="showForm()">Get Started</button>
     </div>
   </div>
-
-  <!-- Right Column -->
   <div class="right-column">
     <img src="assets/welcome.png" alt="Counseling Image" class="counseling-image">
   </div>
 </div>
 
-<!-- Form section, shown only when formVisible is true -->
 <form *ngIf="formVisible" class="counselor-form">
   <div class="questionnaire-container">
-    <!-- Display the current question based on the currentStep index -->
     <ng-container [ngSwitch]="currentStep">
       <!-- Step 1: Type of Therapy -->
       <div *ngSwitchCase="0">
@@ -49,7 +28,7 @@
   
       <!-- Step 2: Age -->
       <div *ngSwitchCase="1">
-        <label for="age">How old are you?</label>
+        <h3>How old are you?</h3>
         <select id="age" (change)="onAgeChange($event)">
           <option *ngFor="let age of ages" [value]="age">{{ age }}</option>
         </select>
@@ -99,7 +78,7 @@
         <div *ngFor="let expectation of therapyExpectations">
           <label><input type="checkbox" (change)="toggleSelection(expectation, 'expectations')" /> {{ expectation }}</label>
         </div>
-        <button type="button" (click)="determineSpecialization()">Find Counsellors</button>
+        <button type="button" (click)="submitForm()">Find Counsellors</button>
       </div>
   
       <!-- Default case when all steps are completed -->
@@ -108,19 +87,5 @@
       </div>
     </ng-container>
   </div>
-
 </form>
 
-
-<div *ngIf="error" class="error-message">{{ error }}</div>
-
-<div *ngIf="counsellors.length!==0">
-  <h3>Recommended Counsellors:</h3>
-  <ul class="counsellors-list">
-    <li *ngFor="let counsellor of counsellors">
-      <strong>Name:</strong> {{ counsellor.name }}<br>
-      <strong>Specialization:</strong> {{ counsellor.specialization }}<br>
-      <strong>Contact Info:</strong> {{ counsellor.contactInfo }}
-    </li>
-  </ul>
-</div>

@@ -1,14 +1,92 @@
+/* General form styling */
+.counselor-form {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Question container */
+.questionnaire-container {
+  margin-bottom: 20px;
+}
+
+/* Heading for each step */
+.questionnaire-container h3 {
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Styling for radio and checkbox labels */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #555;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Button styling */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Error message styling */
+.error-message {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  margin: 10px 0;
+}
+
+/* Styling for the counsellors list */
 .counsellors-list {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+.counsellors-list li {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.counsellors-list strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .counselor-form {
+    padding: 15px;
   }
-  
-  .counsellors-list li {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+
+  button {
+    width: 100%;
   }
+}
   .heading{
     padding-top: 20px;
     text-decoration: underline; 
