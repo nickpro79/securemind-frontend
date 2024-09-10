@@ -1,98 +1,14 @@
-/* General form styling */
-.counselor-form {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-
-/* Question container */
-.questionnaire-container {
-  margin-bottom: 20px;
-}
-
-/* Heading for each step */
-.questionnaire-container h3 {
-  font-size: 1.25rem;
-  margin-bottom: 15px;
-  color: #333;
+/* Main heading */
+.heading {
+  padding-top: 20px;
+  text-decoration: underline;
+  text-align: center;
+  color: #2b2b2b;
   font-weight: bold;
+  font-size: 1.5rem;
 }
 
-/* Styling for radio and checkbox labels */
-label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 1rem;
-  color: #555;
-}
-
-input[type="radio"],
-input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-/* Button styling */
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Error message styling */
-.error-message {
-  color: #e74c3c;
-  font-size: 0.875rem;
-  margin: 10px 0;
-}
-
-/* Styling for the counsellors list */
-.counsellors-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.counsellors-list li {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-}
-
-.counsellors-list strong {
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .counselor-form {
-    padding: 15px;
-  }
-
-  button {
-    width: 100%;
-  }
-}
-  .heading{
-    padding-top: 20px;
-    text-decoration: underline; 
-    text-align: center;
-  }
-  /* Main container with flex display to create two columns */
+/* Welcome container with flex display to create two columns */
 .welcome-container {
   display: flex;
   flex-direction: row; /* Display columns side by side */
@@ -104,6 +20,7 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Left column for content and button */
@@ -112,6 +29,9 @@ button:hover {
   display: flex;
   flex-direction: column; /* Stack content vertically */
   justify-content: center; /* Center content vertically */
+  gap: 15px;
+  font-size: 1rem;
+  color: #4a4a4a;
 }
 
 /* Center and space out content and button */
@@ -127,17 +47,20 @@ button:hover {
 
 /* Styling for the button */
 .get-started-btn {
-  padding: 10px 20px;
+  padding: 12px 28px;
   font-size: 16px;
   color: #fff;
-  background-color: #007bff;
+  background-color: #00a884;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .get-started-btn:hover {
-  background-color: #0056b3;
+  background-color: #008f6e;
+  transform: scale(1.05);
 }
 
 /* Right column for the image */
@@ -153,4 +76,97 @@ button:hover {
   max-width: 100%; /* Ensure image doesn't overflow the column */
   height: auto; /* Maintain aspect ratio */
   border-radius: 8px; /* Optional: Add rounded corners */
+}
+
+/* Main form container styling */
+.counselor-form {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #f7f7f9;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 200px;
+
+}
+
+/* Styling for step headings */
+.step-heading {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Styling for radio and checkbox options */
+.radio-option,
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.radio-option:hover,
+.checkbox-option:hover {
+  background-color: #e8f5e9;
+}
+
+/* Style for radio and checkbox inputs */
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 12px;
+  transform: scale(1.2);
+}
+
+/* Styling for select input */
+.styled-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Common button styles */
+button {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Next button styling */
+.next-btn {
+  background-color: #00a884;
+}
+
+.next-btn:hover {
+  background-color: #008f6e;
+  transform: scale(1.05);
+}
+
+/* Find counselor button styling */
+.find-counselor-btn {
+  background-color: #00796b;
+}
+
+.find-counselor-btn:hover {
+  background-color: #00695c;
+  transform: scale(1.05);
 }
