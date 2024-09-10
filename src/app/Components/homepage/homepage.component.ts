@@ -207,6 +207,7 @@ export class HomepageComponent implements OnInit {
         alert('Report submitted successfully!');
         this.incidentForm.reset();
         this.closeModal();
+        window.location.reload();
       })
       .catch((error) => {
         console.error('Error submitting report:', error);
@@ -216,6 +217,8 @@ export class HomepageComponent implements OnInit {
       console.log('Form is invalid');
       this.incidentForm.markAllAsTouched();
     }
+
+
   }
   
   
