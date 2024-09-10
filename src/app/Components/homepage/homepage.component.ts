@@ -134,7 +134,7 @@ export class HomepageComponent implements OnInit {
 
           this.map.setView(latLng, this.zoom);
 
-          // Remove the previous search marker if it exists
+          
           if (this.searchMarker) {
             this.map.removeLayer(this.searchMarker);
           }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { Login } from '../../Models/login';
 import { UserService } from '../../services/user.service';
 
@@ -15,7 +16,7 @@ password:""
 }
 loginForm:FormGroup=null!
 
-constructor(private _userservice:UserService, private Fb:FormBuilder){}
+constructor(private _userservice:UserService, private Fb:FormBuilder,private router:Router){}
 
 ngOnInit(): void {
   this.loginForm = this.Fb.group({
@@ -40,8 +41,9 @@ ngOnInit(): void {
     this._userservice.Login(this.data)
     .subscribe({
      next:(response)=>{
-      console.log(response)
+      localStorage.setItem("AuthenticationToken",response.token)
       this._userservice.isAuthenticated=true
+      this.router.navigate(['/home'])
     },
      error:(err)=>{console.log(err)}
     })
