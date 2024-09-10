@@ -5,7 +5,20 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-
+.navbar{
+  background-color: #026b53;
+}
+.navbar .nav-link {
+  font-weight: bold;
+  color: #f5f2f2; 
+}
+.navbar-brand{
+  font-weight: bold;
+  color: #f5f2f2; 
+}
+.navbar .nav-link:hover {
+  color: #ffcc00; /* Change this to your hover color */
+}
   .dropdown-menu {
     display: none; /* Hide dropdown by default */
   }
@@ -28,9 +41,9 @@ html, body {
 }
 
 /* Footer styling */
-.footer {
-  background-color: #343a40; /* Dark background color */
-  color: #ffffff; /* White text color */
-  padding: 1rem 0;
-  text-align: center;
+.custom-footer {
+  background-color: #026b53;/* Change this to your desired background color */
+  color: white; /* Change this to your desired text color */
+  font-weight: bold;
+  padding: 20px 0;
 }
