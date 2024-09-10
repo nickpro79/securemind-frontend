@@ -1,13 +1,37 @@
 <!-- Welcome message section, shown only when formVisible is false -->
-<h2  class="heading" >Talk to Top Rated Counselors Online</h2>
+<!-- <h2  class="heading" >Talk to Top Rated Counselors Online</h2>
 <div *ngIf="!formVisible" class="welcome-container">
-  <p>
-    Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
-    Master's Degrees and hours of intensive training, are ready to help you conquer life's challenges. Join over
-    500,000 clients who've thrived with our expert support!
-  </p>
-  <button class="get-started-btn" (click)="showForm()">Get Started</button>
+  <div>
+    <p>
+      Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
+      Master's Degrees and hours of intensive training, are ready to help you conquer life's challenges. Join over
+      500,000 clients who've thrived with our expert support!
+    </p>
+  </div>
+  <div class="button-container">
+    <button class="get-started-btn" (click)="showForm()">Get Started</button>
+  </div>
   <img src="assets/welcome.png"  class="welcome-image" />
+</div> -->
+<!-- welcome.component.html -->
+<h2 class="heading">Talk to Top Rated Counselors Online</h2>
+<div *ngIf="!formVisible" class="welcome-container">
+  <!-- Left Column -->
+  <div class="left-column">
+    <p>
+      Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
+      Master's Degrees and hours of intensive training, are ready to help you conquer life's challenges. Join over
+      500,000 clients who've thrived with our expert support!
+    </p>
+    <div class="button-container">
+      <button class="get-started-btn" (click)="showForm()">Get Started</button>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="right-column">
+    <img src="assets/welcome.png" alt="Counseling Image" class="counseling-image">
+  </div>
 </div>
 
 <!-- Form section, shown only when formVisible is true -->
