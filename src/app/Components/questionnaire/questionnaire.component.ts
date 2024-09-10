@@ -9,7 +9,7 @@ import { CounsellorService } from '../../services/counsellor.service';
 })
 export class QuestionnaireComponent {
   formVisible: boolean = false; // Initially false to show only the welcome message
-
+  currentStep: number = 0;
   // Method to show the form and hide the welcome message
   showForm() {
     this.formVisible = true; // Set formVisible to true when "Get Started" is clicked
@@ -21,13 +21,64 @@ export class QuestionnaireComponent {
   specialization: string = '';
   counsellors: any[] = [];
   error: string = '';
+  ages = Array.from({ length: 100 }, (_, i) => i + 1);
+  therapyReasons = [
+    "I've been feeling depressed",
+    'I feel anxious or overwhelmed',
+    'My mood is interfering with my job/school performance',
+    'I struggle with building or maintaining relationships',
+    "I can't find purpose and meaning in my life",
+    'I am grieving',
+    'I have experienced trauma',
+    'I need to talk through a specific challenge',
+    'I want to gain self confidence',
+    "I want to improve myself but I don't know where to start",
+    'Recommended to me (friend, family, doctor)',
+    'Just exploring',
+    'Other'
+  ];
+
+  therapyExpectations = [
+    'Listens',
+    'Explores my past',
+    'Teaches me new skills',
+    'Challenges my beliefs',
+    'Assigns me homework',
+    'Guides me to set goals',
+    'Proactively checks in with me',
+    'Other',
+    "I don't know"
+  ];
 
   constructor(private counsellorService: CounsellorService) {}
+  
+  // Move to the next question step
+  nextStep(selectedValue: any = null) {
+    if (selectedValue !== null) {
+      // Optionally handle the selection value here
+      console.log('Selected:', selectedValue);
+    }
+    this.currentStep++;
+  }
 
+  // Handle checkbox selections
+  toggleSelection(option: string, type: string) {
+    console.log(`Toggled ${type}:`, option);
+    // Logic to store selected checkboxes
+  }
+  
   onExpectationsChange(selectedAnswer: string) {
     this.expectationsScore = TherapyExpectations[selectedAnswer as keyof typeof TherapyExpectations];
     this.calculateTotalScore();
   }
+  // Example event handler with proper type casting
+onAgeChange(event: Event) {
+  const target = event.target as HTMLSelectElement; // Cast to HTMLSelectElement to access 'value'
+  const selectedAge = target?.value; // Safe access to the 'value' property
+  console.log('Selected Age:', selectedAge);
+  this.nextStep(); 
+}
+
 
   onReasonsChange(selectedAnswer: string) {
     this.reasonsScore = TherapyReasons[selectedAnswer as keyof typeof TherapyReasons];
@@ -63,4 +114,7 @@ export class QuestionnaireComponent {
         }
       );
   } 
+  submitForm() {
+    this.determineSpecialization(); // Call specialization determination on form submit
+  }
 }
