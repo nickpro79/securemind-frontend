@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginpageComponent } from './Components/loginpage/loginpage.component';
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
 import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule,HTTP_INTERCEPTORS, provideHttpClient, withInterceptors} from '@angular/common/http';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { HospitalsNearMeComponent } from './Components/hospitals-near-me/hospitals-near-me.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { QuestionnaireComponent } from './Components/questionnaire/questionnaire.component';
 import { RecommendationsComponent } from './Components/recommendations/recommendations.component';
 import { ExercisesComponent } from './Components/exercises/exercises.component';
+import { authInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,13 @@ import { ExercisesComponent } from './Components/exercises/exercises.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     FormsModule,
     MatIconModule,
     ReactiveFormsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient( withInterceptors( [authInterceptor] )),
   ],
   bootstrap: [AppComponent]
 })
