@@ -9,6 +9,7 @@ import { PolicestationsNearMeComponent } from './Components/policestations-near-
 import { QuestionnaireComponent } from './Components/questionnaire/questionnaire.component';
 import { RecommendationsComponent } from './Components/recommendations/recommendations.component';
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,6 +24,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/questionnaire', pathMatch: 'full' },
   { path: '**', redirectTo: '/questionnaire' }  ,
     {path:'**',component:PagenotfoundComponent}
+  { path: 'counsellors', component: QuestionnaireComponent,canActivate:[AuthGuard] },
+  {path:'**',component:PagenotfoundComponent}
   
 ];
 

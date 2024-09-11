@@ -22,7 +22,8 @@ export class HomepageComponent implements OnInit {
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       type: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      Location: ['']
     },{
       validators:[this.latitudeValidator(),this.longitudeValidator()]
     });
@@ -80,6 +81,45 @@ export class HomepageComponent implements OnInit {
       .catch(error => {
         console.error('Error fetching incidents:', error);
       });
+
+      fetch('http://localhost:5240/api/report')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched reports:', data); // Log the response to check its structure
+
+        // Check if data has the $values property and it is an array
+        if (data && Array.isArray(data.$values)) {
+          const animatedIcon = L.divIcon({
+            className: 'pulse-icon',  // Apply the CSS class with animation
+            html: '<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff0000"/></svg>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
+          });
+          // Add markers for each incident
+          data.$values.forEach((incident: any) => {
+            const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
+            
+            const marker = L.marker(latLng, { icon: L.icon({
+              iconUrl: 'assets/circle-icon.svg', // Path to your red icon
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              className: 'pulse-icon'
+            }) })
+              .addTo(this.map)
+              .bindPopup(`<b>Incident:</b><br>${incident.description}`)
+              .openPopup();
+              
+            this.incidentMarkers.push(marker); // Store the marker
+          });
+        } else {
+          console.error('Expected an array of incidents but got:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching incidents:', error);
+      });
+      
   }
 
   searchLocation(searchTerm: string): void {
@@ -94,7 +134,7 @@ export class HomepageComponent implements OnInit {
 
           this.map.setView(latLng, this.zoom);
 
-          // Remove the previous search marker if it exists
+          
           if (this.searchMarker) {
             this.map.removeLayer(this.searchMarker);
           }
@@ -128,45 +168,61 @@ export class HomepageComponent implements OnInit {
 
   submitForm(): void {
     if (this.incidentForm.valid) {
-      // Collect form data
-      const formData = this.incidentForm.value;
+      const formData = {
+        latitude: this.incidentForm.value.latitude,
+        longitude: this.incidentForm.value.longitude,
+        type: this.incidentForm.value.type,
+        description: this.incidentForm.value.description,
+        Location: {
+          Latitude: this.incidentForm.value.latitude,
+          Longitude: this.incidentForm.value.longitude
+        },
+        ReportTime: new Date().toISOString() // Or any other relevant date/time
+      };
+      
   
-      // Send data to the backend using fetch
       fetch('http://localhost:5240/api/Report', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       })
       .then(async (response) => {
-        // Log the full response to understand the error
         const result = await response.json();
         console.log('Server response:', response.status, result);
-          if (!response.ok) {
-            // Handle error response
-            throw new Error('Failed to submit the incident report.');
+  
+        if (!response.ok) {
+          // Log specific validation errors if available
+          console.error('Validation errors:', result.errors);
+          if (result.errors && result.errors['Location']) {
+            console.error('Location validation error:', result.errors['Location']);
           }
-          return response.json();
-        })
-        .then(result => {
-          console.log('Incident submitted successfully:', result);
-          alert('Report submitted successfully!');
-          this.incidentForm.reset();
-          this.closeModal();
-        })
-        .catch(error => {
-          console.error('Error submitting report:', error);
-          alert('There was an error submitting your report. Please try again.');
-        });
+          if (result.errors && result.errors['report']) {
+            console.error('Report validation error:', result.errors['report']);
+          }
+          throw new Error(result.title || 'Failed to submit the incident report.');
+        }
+  
+        alert('Report submitted successfully!');
+        this.incidentForm.reset();
+        this.closeModal();
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error submitting report:', error);
+        alert('There was an error submitting your report. Please try again.');
+      });
     } else {
       console.log('Form is invalid');
-      // Trigger validation messages
       this.incidentForm.markAllAsTouched();
     }
+
+
   }
   
-
+  
+  
   validateControl(input:string){
     return this.incidentForm.get(input)?.invalid &&
     (this.incidentForm.get(input)?.touched || this.incidentForm.get(input)?.dirty)
@@ -202,8 +258,8 @@ latitudeValidator(): ValidatorFn {
   return (formGroup: AbstractControl): { [key: string]: boolean } | null => {
     const latitude = parseFloat(formGroup.get('latitude')?.value);
         const error: { [key: string]: boolean } = {};
-        if(!Number.isInteger(latitude)){
-          error['notInteger']=true
+        if (isNaN(latitude)) {
+          error['notANumber'] = true;
         }
         if (latitude < -90 || latitude > 90) {
           error['valueOutOfRange'] = true;
