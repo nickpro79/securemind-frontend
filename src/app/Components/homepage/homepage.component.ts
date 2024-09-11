@@ -27,6 +27,7 @@ export class HomepageComponent implements OnInit {
     },{
       validators:[this.latitudeValidator(), this.longitudeValidator()]
     });
+    localStorage.setItem("AuthenticationToken","")
   }
 
   ngOnInit(): void {
@@ -44,9 +45,8 @@ export class HomepageComponent implements OnInit {
       const response = await fetch(url);
       const data = await response.json();
       console.log(`Fetched data from ${url}:`, data);
-
       if (data && Array.isArray(data.$values)) {
-        this.mapService.clearMarkers(); // Clear existing markers
+         
         data.$values.forEach((incident: any) => {
           const latLng: L.LatLngExpression = [incident.location.latitude, incident.location.longitude];
           this.mapService.addMarker(latLng, 'assets/circle-icon.svg', incident.description);
