@@ -32,16 +32,16 @@ export class ArticlesComponent {
       imageUrl: 'https://dy7glz37jgl0b.cloudfront.net/advice/images/7f4685e00038abbc9ca7c6aa7f834a5d-girl-clutches-head-on-couch_l.jpg' 
     },
     {
-      title: 'How Harnessing Willpower To Meet Your Goals Can Change Your Life',
-      description: 'Willpower can be a powerful tool to help you reach your goals and change your life. However, it’s not always easy to exercise this type of self-control even in the best of times......',
-      link: 'https://www.betterhelp.com/advice/willpower/how-harnessing-willpower-to-meet-your-goals-can-change-your-life/',
-      imageUrl: 'https://dy7glz37jgl0b.cloudfront.net/advice/images/b0c659f3b45ab03ffbecf781f227798b-older-woman-speaks-on-phone-to-client_l.jpg' 
+      title: 'Ways To Cope With Overwhelming Anxiety',
+      description: 'Sometimes, it may seem as if there is simply so much going on in your head that you don’t know how to move forward. If you feel overwhelmed by stress and fear......',
+      link: 'https://www.betterhelp.com/advice/anxiety/ways-to-cope-with-overwhelming-anxiety/',
+      imageUrl: 'https://dy7glz37jgl0b.cloudfront.net/advice/images/ee27b7980e4f81e46bd25482cffbd6c2-man-looks-past-his-laptop-in-an-office-setting_l.jpeg' 
     },
     {
-      title: 'How to harness ambition in life for positive outcomes',
-      description: 'At its core, ambition can be a compelling force that motivates individuals to chase their goals and strive for success. It often plays an important role in personal growth.....',
-      link: 'https://www.betterhelp.com/advice/ambition/how-to-harness-ambition-in-life-for-positive-outcomes/',
-      imageUrl: 'https://dy7glz37jgl0b.cloudfront.net/advice/images/341c509086ff5067842a0d7027315868-girl-holding-mug-smiling-by-computer_l.jpg' // Replace with the actual image URL
+      title: 'Couples Therapy',
+      description: "If you're concerned because you and your partner have been arguing and feel like you need support as a couple, couples therapy can help. Couples therapy exercises may help you both learn the effective.....",
+      link: 'https://www.betterhelp.com/advice/therapy/how-does-couples-therapy-work/',
+      imageUrl: 'https://advice.cdn.betterhelp.com/md/man-and-woman-sit-on-couch-together-while-smiling-at-each-other.jpg' // Replace with the actual image URL
     }
   ];
 }
