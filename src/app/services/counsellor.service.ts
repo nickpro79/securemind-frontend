@@ -13,7 +13,7 @@ export class CounsellorService {
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<{ $values: any[] }>(`${this.apiUrl}?specialization=${encodeURIComponent(specialization)}`, { headers })
       .pipe(
-        map(response => response.$values) // Extracts the array from the response
+        map(response => response.$values) 
       );
   }
   
