@@ -1,0 +1,22 @@
+<h2 class="section-title">Recommended Counselors</h2>
+
+<div *ngIf="counselors.length === 0" class="no-counselors-message">
+  <p>No counselors available for the selected specialization.</p>
+</div>
+
+<ul class="counselors-list">
+  <li *ngFor="let counselor of counselors" class="counselor-card">
+    <div class="counselor-info">
+      <div class="counselor-details">
+        <h3 class="counselor-name">{{ counselor.name }}</h3>
+        <p class="counselor-specialization">
+          <strong>Specialization:</strong> {{ counselor.specialization }}
+        </p>
+        <p class="counselor-contact">
+          <strong>Contact Info:</strong> {{ counselor.contactInfo }}
+        </p>
+      </div>
+      <button class="contact-button">Contact</button>
+    </div>
+  </li>
+</ul>

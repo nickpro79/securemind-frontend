@@ -9,7 +9,7 @@ export class CounsellorService {
   private apiUrl = ' http://localhost:5240/api/Counsellors/Specialization';
   constructor(private http: HttpClient) { }
  
-  getCounsellors(specialization: string): Observable<any[]> {
+   getCounselorsBySpecialization(specialization: string): Observable<any[]> {
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<{ $values: any[] }>(`${this.apiUrl}?specialization=${encodeURIComponent(specialization)}`, { headers })
       .pipe(

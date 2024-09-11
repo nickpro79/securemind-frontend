@@ -15,6 +15,8 @@ import { ArticlesComponent } from './Components/articles/articles.component';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async'
 import {MatIconModule} from '@angular/material/icon';
 import { QuestionnaireComponent } from './Components/questionnaire/questionnaire.component';
+import { RecommendationsComponent } from './Components/recommendations/recommendations.component';
+import { ExercisesComponent } from './Components/exercises/exercises.component';
 import { authInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
@@ -28,6 +30,8 @@ import { authInterceptor } from './interceptor/auth.interceptor';
     PolicestationsNearMeComponent,
     ArticlesComponent,
     QuestionnaireComponent,
+    RecommendationsComponent,
+    ExercisesComponent,
   ],
   imports: [
     BrowserModule,

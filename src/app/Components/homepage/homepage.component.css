@@ -18,39 +18,24 @@
 .col-md-4{
   padding-top: 80px;
 }
-.btn-primary {
-  background-color: #6c757d;
-  border-color: #dce2e7;
+button{
+  padding: 12px 28px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #00a884;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.bg-light {
-  background-color: #f8f9fa !important;
-  border: 1px solid #ddd;
-}
 
-
-
-.btn-primary {
-  /*     display: block; /* Make button a block element */
-       margin: 20px auto 0; /* Center horizontally with auto margins */
-      background-color: #3498db; /* Light blue button */
-      border: none;
-      height: 44px;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: 500;
-      color: #ffffff; /* White text color */
-      transition: background-color 0.3s, transform 0.3s;
-  }
-  
-
-.btn-success:hover {
-  background-color: #218838; /* Darker green on hover */
-  transform: translateY(-2px); /* Subtle lift effect */
+button:hover {
+  background-color: #008f6e;
+  transform: scale(1.05);
 }
 
 .is-invalid {
   border-color: red;
 }
-
-
