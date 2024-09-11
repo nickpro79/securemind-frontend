@@ -1,0 +1,29 @@
+<h2 class="heading">Mental Health Exercises</h2>
+<div class="container mt-4">
+  <div class="row mb-4"> 
+    <div class="col-md-4" *ngFor="let exercise of exercises.slice(0, 3)">
+      <div class="card h-100">
+        <img [src]="exercise.thumbnailUrl" class="card-img-top" alt="{{ exercise.title }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ exercise.title }}</h5>
+          <p class="card-text">{{ exercise.description }}</p>
+          <a [href]="exercise.url" class="button" target="_blank">Watch Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let exercise of exercises.slice(3, 6)">
+      <div class="card h-100">
+        <img [src]="exercise.thumbnailUrl" class="card-img-top" alt="{{ exercise.title }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ exercise.title }}</h5>
+          <p class="card-text">{{ exercise.description }}</p>
+          <a [href]="exercise.url" class="button" target="_blank">Watch Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

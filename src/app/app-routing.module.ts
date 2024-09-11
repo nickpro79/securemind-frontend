@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticlesComponent } from './Components/articles/articles.component';
+import { ExercisesComponent } from './Components/exercises/exercises.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { HospitalsNearMeComponent } from './Components/hospitals-near-me/hospitals-near-me.component';
 import { LoginpageComponent } from './Components/loginpage/loginpage.component';
@@ -19,11 +20,12 @@ const routes: Routes = [
   {path:'login', component:LoginpageComponent},
   {path:'register',component:RegisterpageComponent},
   {path:'articles', component:ArticlesComponent},
+  { path: 'exercises', component: ExercisesComponent }, // Add this line
   { path: 'questionnaire', component: QuestionnaireComponent },
   { path: 'recommendations', component: RecommendationsComponent },
   { path: '', redirectTo: '/questionnaire', pathMatch: 'full' },
   { path: '**', redirectTo: '/questionnaire' }  ,
-    {path:'**',component:PagenotfoundComponent}
+    {path:'**',component:PagenotfoundComponent},
   { path: 'counsellors', component: QuestionnaireComponent,canActivate:[AuthGuard] },
   {path:'**',component:PagenotfoundComponent}
   
