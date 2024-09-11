@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'recommendations', component: RecommendationsComponent },
   { path: '', redirectTo: '/questionnaire', pathMatch: 'full' },
   { path: '**', redirectTo: '/questionnaire' }  ,
-    {path:'**',component:PagenotfoundComponent}
+    {path:'**',component:PagenotfoundComponent},
   { path: 'counsellors', component: QuestionnaireComponent,canActivate:[AuthGuard] },
   {path:'**',component:PagenotfoundComponent}
   
