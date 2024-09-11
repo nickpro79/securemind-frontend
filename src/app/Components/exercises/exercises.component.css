@@ -1,0 +1,52 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  
+}
+
+.heading {
+  padding-top: 20px;
+  text-decoration: underline;
+  text-align: center;
+  color: #2b2b2b;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.mb-4 {
+  margin-bottom: 100px; /* Adjust the value to control space between rows */
+}
+
+.card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card-body .button {
+  text-decoration: none; /* Remove underline */
+}
+
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  height: 180px; /* Adjust the height as needed */
+  object-fit: cover; /* Ensures the image covers the space without distortion */
+}
+.button{
+  padding: 12px 28px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #00a884;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.button:hover {
+  background-color: #008f6e;
+  transform: scale(1.05);
+}
