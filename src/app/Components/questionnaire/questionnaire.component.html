@@ -1,40 +1,96 @@
-<!-- Welcome message section, shown only when formVisible is false -->
-<h2  class="heading" >Talk to Top Rated Counselors Online</h2>
+<h2 class="heading">Talk to Top Rated Counselors Online</h2>
 <div *ngIf="!formVisible" class="welcome-container">
-  <p>
-    Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
-    Master's Degrees and hours of intensive training, are ready to help you conquer life's challenges. Join over
-    500,000 clients who've thrived with our expert support!
-  </p>
-  <button class="get-started-btn" (click)="showForm()">Get Started</button>
-  <img src="assets/welcome.png"  class="welcome-image" />
+  <div class="left-column">
+    <p>
+      Get support anytime, anywhere—connect with online counselors now! Our top-notch online counselors, all with
+      Master's Degrees and hours of intensive training, are ready to help you conquer life's challenges. Join over
+      500,000 clients who've thrived with our expert support!
+    </p>
+    <div class="button-container">
+      <button class="get-started-btn" (click)="showForm()">Get Started</button>
+    </div>
+  </div>
+  <div class="right-column">
+    <img src="assets/welcome.png" alt="Counseling Image" class="counseling-image">
+  </div>
 </div>
 
-<!-- Form section, shown only when formVisible is true -->
 <form *ngIf="formVisible" class="counselor-form">
-  <h3>What are your expectations from your therapist?</h3>
-  <label><input type="radio" name="expectations" (change)="onExpectationsChange('Listens')"> Listens</label>
-  <label><input type="radio" name="expectations" (change)="onExpectationsChange('ExploresPast')"> Explores my past</label>
-  <label><input type="radio" name="expectations" (change)="onExpectationsChange('TeachesSkills')"> Teaches me new skills</label>
+  <div class="questionnaire-container">
+    <ng-container [ngSwitch]="currentStep">
+      <!-- Step 1: Type of Therapy -->
+      <div *ngSwitchCase="0">
+        <h3 class="step-heading">What type of therapy are you looking for?</h3>
+        <label class="radio-option">
+          <input type="radio" name="therapyType" (change)="nextStep('Individual')" /> Individual (for myself)
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="therapyType" (change)="nextStep('Couples')" /> Couples (for myself and my partner)
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="therapyType" (change)="nextStep('Teen')" /> Teen (for my child)
+        </label>
+      </div>
 
-  <h3>What led you to consider therapy today?</h3>
-  <label><input type="radio" name="reasons" (change)="onReasonsChange('Depressed')"> I've been feeling depressed</label>
-  <label><input type="radio" name="reasons" (change)="onReasonsChange('Anxious')"> I feel anxious or overwhelmed</label>
-  <label><input type="radio" name="reasons" (change)="onReasonsChange('JobPerformance')"> My mood is interfering with my job/school performance</label>
+      <!-- Step 2: Age -->
+      <div *ngSwitchCase="1" class="age-section">
+        <h3 class="step-heading">How old are you?</h3>
+        <select  id="age" class="styled-select" (change)="onAgeChange($event)">
+          <option *ngFor="let age of ages" [value]="age">{{ age }}</option>
+        </select>
+      </div>
 
-  <button type="button" (click)="determineSpecialization()">Find Counsellors</button>
+      <!-- Step 3: Gender Identity -->
+      <div *ngSwitchCase="2">
+        <h3 class="step-heading">How do you identify?</h3>
+        <label class="radio-option"><input type="radio" name="gender" (change)="nextStep('Straight')" /> Straight</label>
+        <label class="radio-option"><input type="radio" name="gender" (change)="nextStep('Gay')" /> Gay</label>
+        <label class="radio-option"><input type="radio" name="gender" (change)="nextStep('Lesbian')" /> Lesbian</label>
+        <label class="radio-option"><input type="radio" name="gender" (change)="nextStep('Bi or Pan')" /> Bi or Pan</label>
+        <label class="radio-option"><input type="radio" name="gender" (change)="nextStep('Prefer not to say')" /> Prefer not to say</label>
+      </div>
+
+      <!-- Step 4: Importance of Religion -->
+      <div *ngSwitchCase="3">
+        <h3 class="step-heading">How important is religion in your life?</h3>
+        <label class="radio-option"><input type="radio" name="religion" (change)="nextStep('Very important')" /> Very important</label>
+        <label class="radio-option"><input type="radio" name="religion" (change)="nextStep('Important')" /> Important</label>
+        <label class="radio-option"><input type="radio" name="religion" (change)="nextStep('Somewhat important')" /> Somewhat important</label>
+        <label class="radio-option"><input type="radio" name="religion" (change)="nextStep('Not important at all')" /> Not important at all</label>
+      </div>
+
+      <!-- Step 5: Alcohol Consumption -->
+      <div *ngSwitchCase="4">
+        <h3 class="step-heading">How often do you drink alcohol?</h3>
+        <label class="radio-option"><input type="radio" name="alcohol" (change)="nextStep('Never')" /> Never</label>
+        <label class="radio-option"><input type="radio" name="alcohol" (change)="nextStep('Infrequently')" /> Infrequently</label>
+        <label class="radio-option"><input type="radio" name="alcohol" (change)="nextStep('Monthly')" /> Monthly</label>
+        <label class="radio-option"><input type="radio" name="alcohol" (change)="nextStep('Weekly')" /> Weekly</label>
+        <label class="radio-option"><input type="radio" name="alcohol" (change)="nextStep('Daily')" /> Daily</label>
+      </div>
+
+      <!-- Step 6: Reason for Therapy -->
+      <div *ngSwitchCase="5">
+        <h3 class="step-heading">What led you to consider therapy today?</h3>
+        <div *ngFor="let reason of therapyReasons" class="checkbox-option">
+          <label><input type="checkbox" (change)="toggleSelection(reason, 'reasons')" /> {{ reason }}</label>
+        </div>
+        <button class="next-btn" (click)="nextStep()">Next</button>
+      </div>
+
+      <!-- Step 7: Expectations from Therapist -->
+      <div *ngSwitchCase="6">
+        <h3 class="step-heading">What are your expectations from your therapist?</h3>
+        <div *ngFor="let expectation of therapyExpectations" class="checkbox-option">
+          <label><input type="checkbox" (change)="toggleSelection(expectation, 'expectations')" /> {{ expectation }}</label>
+        </div>
+        <button class="find-counselor-btn" (click)="submitForm()">Find Counselors</button>
+      </div>
+
+      <!-- Default case when all steps are completed -->
+      <div *ngSwitchDefault>
+        <h3 class="step-heading">Thank you for completing the questionnaire!</h3>
+      </div>
+    </ng-container>
+  </div>
 </form>
-
-
-<div *ngIf="error" class="error-message">{{ error }}</div>
-
-<div *ngIf="counsellors.length!==0">
-  <h3>Recommended Counsellors:</h3>
-  <ul class="counsellors-list">
-    <li *ngFor="let counsellor of counsellors">
-      <strong>Name:</strong> {{ counsellor.name }}<br>
-      <strong>Specialization:</strong> {{ counsellor.specialization }}<br>
-      <strong>Contact Info:</strong> {{ counsellor.contactInfo }}
-    </li>
-  </ul>
-</div>

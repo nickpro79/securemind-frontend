@@ -3,6 +3,15 @@
     margin-top: 100px;
     margin-bottom: 50px;
 }
+.heading {
+  padding-top: 20px;
+  text-decoration: underline;
+  text-align: center;
+  color: #2b2b2b;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 .card {
     transition: transform 0.3s, box-shadow 0.3s;
   }

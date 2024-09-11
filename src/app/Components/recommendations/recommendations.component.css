@@ -1,0 +1,89 @@
+/* Main title for the section */
+.section-title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Styling for the no counselors message */
+  .no-counselors-message p {
+    text-align: center;
+    color: #ff4d4d;
+    font-size: 1.2rem;
+  }
+  
+  /* Main list container */
+  .counselors-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 150px;
+  }
+  
+  /* Each counselor card styling */
+  .counselor-card {
+    width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Hover effect for counselor cards */
+  .counselor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Counselor information styling */
+  .counselor-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+  
+  /* Styling for counselor name */
+  .counselor-name {
+    font-size: 1.5rem;
+    color: #00796b;
+    margin: 0;
+  }
+  
+  /* Styling for counselor details */
+  .counselor-details {
+    flex: 1;
+    margin-bottom: 15px;
+  }
+  
+  /* Styling for specialization and contact */
+  .counselor-specialization,
+  .counselor-contact {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  /* Button for contacting the counselor */
+  .contact-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00a884;
+    color: #ffffff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Contact button hover effect */
+  .contact-button:hover {
+    background-color: #008f6e;
+  }
+  
