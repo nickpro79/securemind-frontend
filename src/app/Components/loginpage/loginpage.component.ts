@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit,EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Login } from '../../Models/login';
@@ -42,6 +43,7 @@ ngOnInit(): void {
     .subscribe({
      next:(response)=>{
       localStorage.setItem("AuthenticationToken",response.token)
+      this._userservice.login();
       this._userservice.isAuthenticated=true
       this.router.navigate(['/home'])
     },

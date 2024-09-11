@@ -21,7 +21,6 @@
       </div>
     </div>
 
-    <!-- Right Section: Report Incidents -->
     <div class="col-md-4">
       <div class="card shadow-sm">
         <div class="card-body">
@@ -34,7 +33,7 @@
             anonymous. Together, we can create safer communities!
           </p>
           <div class="d-grid gap-2">
-            <!-- Button to open the modal -->
+
             <button
               class=""
               (click)="openModal()"
@@ -71,7 +70,6 @@
         ></button>
       </div>
       <div class="modal-body">
-        <!-- Incident Form inside the modal -->
         <form [formGroup]="incidentForm" (ngSubmit)="submitForm()">
           <div class="mb-3">
             <label for="latitude" class="form-label">Latitude</label>
