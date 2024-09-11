@@ -8,6 +8,7 @@ import { PagenotfoundComponent } from './Components/pagenotfound/pagenotfound.co
 import { PolicestationsNearMeComponent } from './Components/policestations-near-me/policestations-near-me.component';
 import { QuestionnaireComponent } from './Components/questionnaire/questionnaire.component';
 import { RegisterpageComponent } from './Components/registerpage/registerpage.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path:'login', component:LoginpageComponent},
   {path:'register',component:RegisterpageComponent},
   {path:'articles', component:ArticlesComponent},
-  { path: 'counsellors', component: QuestionnaireComponent },
+  { path: 'counsellors', component: QuestionnaireComponent,canActivate:[AuthGuard] },
   {path:'**',component:PagenotfoundComponent}
   
 ];
