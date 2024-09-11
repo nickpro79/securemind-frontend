@@ -1,4 +1,3 @@
-
 <div class="container mt-4">
   <div class="row">
     <!-- Left Section: Search and Map -->
@@ -35,10 +34,7 @@
           </p>
           <div class="d-grid gap-2">
             <!-- Button to open the modal -->
-            <button
-              class=""
-              (click)="openModal()"
-            >
+            <button class="btn btn-primary" (click)="openModal()">
               Share Incident Anonymously
             </button>
           </div>
@@ -47,7 +43,6 @@
     </div>
   </div>
 </div>
-
 
 <div
   class="modal fade"
@@ -74,36 +69,20 @@
         <!-- Incident Form inside the modal -->
         <form [formGroup]="incidentForm" (ngSubmit)="submitForm()">
           <div class="mb-3">
-            <label for="latitude" class="form-label">Latitude</label>
+            <label for="location" class="form-label">Location</label>
             <input
-              type="text"
-              class="form-control"
-              id="latitude"
-              formControlName="latitude"
-              [class.is-invalid]="validateControl('latitude')"
+                type="text"
+                class="form-control"
+                id="location"
+                formControlName="location"
+                [class.is-invalid]="validateControl('location')"
+                placeholder="Enter location..."
             />
-            <span class="text-danger" 
-            *ngIf="validateControlError('latitude','required')">Please Enter Latitude</span>
-            <span class="text-danger" 
-            *ngIf="validateControlError('latitude','notANumber')">Please Enter an Integer</span>
-            <span class="text-danger" 
-            *ngIf="validateControlError('latitude','valueOutOfRange')">Value must be between -90 and 90</span>
-          </div>
-          <div class="mb-3">
-            <label for="longitude" class="form-label">Longitude</label>
-            <input
-              type="text"
-              class="form-control"
-              id="longitude"
-              formControlName="longitude"
-              [class.is-invalid]="validateControl('longitude')"
-            />
-            <span class="text-danger" 
-            *ngIf="validateControlError('longitude','required')">Please Enter Longitude</span>
-            <span class="text-danger" 
-            *ngIf="validateControlError('longitude','notANumber')">Please Enter an Integer</span>
-            <span class="text-danger" 
-            *ngIf="validateControlError('longitude','valueOutOfRange')">Value must be between -180 and 180</span>
+            <span
+              class="text-danger"
+              *ngIf="validateControlError('location', 'required')"
+              >Please enter a location</span
+            >
           </div>
           <div class="mb-3">
             <label for="incidentType" class="form-label">Incident Type</label>
@@ -133,10 +112,9 @@
             <span class="text-danger" 
             *ngIf="validateControlError('description','required')">Please Enter Description</span>
           </div>
-          <button type="submit"  class="btn btn-primary btn-block">Report</button>
+          <button type="submit" class="btn btn-primary btn-block">Report</button>
         </form>
       </div>
     </div>
   </div>
-  
 </div>
