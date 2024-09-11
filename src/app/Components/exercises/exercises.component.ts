@@ -41,10 +41,10 @@ export class ExercisesComponent {
       thumbnailUrl: 'https://i3.ytimg.com/vi/inpok4MKVLM/0.jpg'
     },
     {
-      title: 'Yoga Nidra for Deep Sleep',
-      description: 'A simple practice of Yoga Nidra holds the power to change you completely.',
-      url: 'https://www.youtube.com/watch?v=uPSml_JQGVY&list=PLe1px9-uNQTqk7Ks-dMlHpd0HuRjUs52n&index=2',
-      thumbnailUrl: 'https://i3.ytimg.com/vi/uPSml_JQGVY/0.jpg'
+      title: 'Mental Reset in 5 Minutes ',
+      description: 'Get help for anxiety and stress with this short and quick 5 minute guided meditation',
+      url: 'https://youtu.be/ztTexqGQ0VI?si=xYLDJNmQimlvAWto',
+      thumbnailUrl: 'https://i3.ytimg.com/vi/ztTexqGQ0VI/0.jpg'
     }
   ];
   constructor(private sanitizer: DomSanitizer) {}
