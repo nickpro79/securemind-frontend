@@ -13,12 +13,21 @@
               <li class="nav-item">
                   <a class="nav-link" routerLink="/home">Home</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item dropdown" (click)="toggleDropdown()">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Nearby Services
+                </a>
+                <div class="dropdown-menu" [ngClass]="{'show': isDropdownOpen}">
+                  <a class="dropdown-item" routerLink="/hospitals-near-me">Hospitals Near Me</a>
+                  <a class="dropdown-item" routerLink="/police-stations-near-me">Police Stations Near Me</a>
+                </div>
+              </li>
+              <!-- <li class="nav-item">
                   <a class="nav-link" routerLink="/hospitals-near-me">Hospitals Near Me</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" routerLink="/police-stations-near-me">Police Stations Near Me</a>
-              </li>
+              </li> -->
               <li class="nav-item dropdown" (click)="toggleDropdown()">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   Resources

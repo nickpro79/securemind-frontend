@@ -12,4 +12,8 @@ export class AppComponent {
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+  toggleDropdownService(){
+    this.isDropdownOpen = !this.isDropdownOpen;
+
+  }
 }
