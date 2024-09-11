@@ -30,6 +30,8 @@
 }
 .card-text{
   margin-bottom: 30px;
+  text-align: justify;
+
 }
 .card-img-top {
   height: 180px; /* Adjust the height as needed */

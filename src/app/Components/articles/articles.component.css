@@ -11,18 +11,44 @@
   font-weight: bold;
   font-size: 1.5rem;
 }
-
+.row {
+  margin-bottom: 20px; 
+}
 .card {
     transition: transform 0.3s, box-shadow 0.3s;
+    text-align: justify;
+    margin-bottom: 15px;
   }
-  
+  .card-text{
+    margin-bottom: 30px;
+    text-align: justify;
+  }
   .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
+  .card-body .button {
+    text-decoration: none; /* Remove underline */
+  }
   .card-img-top {
     height: 180px; /* Adjust the height as needed */
     object-fit: cover; /* Ensures the image covers the space without distortion */
+  }
+  .button{
+    padding: 12px 28px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #00a884;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .button:hover {
+    background-color: #008f6e;
+    transform: scale(1.05);
   }
   
