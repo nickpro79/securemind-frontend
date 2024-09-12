@@ -7,13 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SecureMind-Frontend';
-  isDropdownOpen = false;
+  isNearbyServicesOpen = false;
+  isResourcesOpen = false;
 
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
+  toggleDropdown(dropdown: string) {
+    if (dropdown === 'nearbyServices') {
+      this.isNearbyServicesOpen = !this.isNearbyServicesOpen;
+      this.isResourcesOpen = false; // Close the other dropdown
+    } else if (dropdown === 'resources') {
+      this.isResourcesOpen = !this.isResourcesOpen;
+      this.isNearbyServicesOpen = false; // Close the other dropdown
+    }
   }
-  toggleDropdownService(){
-    this.isDropdownOpen = !this.isDropdownOpen;
-
+  preventClose(event: MouseEvent) {
+    event.stopPropagation();
   }
 }
