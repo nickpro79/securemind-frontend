@@ -18,7 +18,8 @@ export class CounsellorService {
           specialization: counselor.specialization,
           contactInfo: counselor.contactInfo,
           latitude: counselor.location?.latitude,  // Ensure this matches the API response structure
-          longitude: counselor.location?.longitude
+          longitude: counselor.location?.longitude,
+          location:counselor.location?.locationName
         })))
       );
   }
