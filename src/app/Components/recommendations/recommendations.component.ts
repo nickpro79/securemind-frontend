@@ -28,9 +28,7 @@ export class RecommendationsComponent {
   getCounselors() {
     this.counsellorService.getCounselorsBySpecialization(this.specialization)
       .subscribe(data => {
-        console.log('Counselors data:', data);  // Check the data structure
         this.counselors = data.filter((counselor: any) => {
-          console.log('Counselor coordinates:', counselor.latitude, counselor.longitude);  // Log coordinates
           if (counselor.latitude && counselor.longitude) {
             const distance = this.mapService.distanceFromCurrentLocation(
               counselor.latitude,
