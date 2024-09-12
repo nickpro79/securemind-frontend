@@ -19,9 +19,21 @@ export class AppComponent implements OnInit {
       this.loginText = isLoggedIn ? 'Logout' : 'Login';
     });
   }
+  isNearbyServicesOpen = false;
+  isResourcesOpen = false;
 
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
+
+  toggleDropdown(dropdown: string) {
+    if (dropdown === 'nearbyServices') {
+      this.isNearbyServicesOpen = !this.isNearbyServicesOpen;
+      this.isResourcesOpen = false; // Close the other dropdown
+    } else if (dropdown === 'resources') {
+      this.isResourcesOpen = !this.isResourcesOpen;
+      this.isNearbyServicesOpen = false; // Close the other dropdown
+    }
+  }
+  preventClose(event: MouseEvent) {
+    event.stopPropagation();
   }
 
   onLogout() {

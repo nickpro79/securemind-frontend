@@ -1,0 +1,17 @@
+<div class="popup-container">
+    <div class="popup-content">
+      <div class="profile-image">
+        <img [src]="'assets/profile.svg'" alt="Profile Photo" />
+      </div>
+      <div class="profile-details">
+        <h2 class="counselor-name">{{ counselor.name }}</h2>
+        <p class="counselor-specialization">{{ counselor.specialization }}</p>
+        <div class="profile-contact-info">
+          <p><i class="fas fa-envelope"></i> {{ counselor.contactInfo }}</p>
+          <p><i class="fas fa-map-marker-alt"></i> {{ counselor.location }}</p>
+        </div>
+        <button class="close-button" (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+  

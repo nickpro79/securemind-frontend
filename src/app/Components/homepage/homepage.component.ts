@@ -17,15 +17,13 @@ export class HomepageComponent implements OnInit {
   incidentForm: FormGroup;
   searchMarker?: L.Marker; 
 
+
   constructor(private fb: FormBuilder, private mapService: MapService) {
+    
     this.incidentForm = this.fb.group({
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
+      location: ['', Validators.required],
       type: ['', Validators.required],
-      description: ['', Validators.required],
-      Location: ['']
-    },{
-      validators:[this.latitudeValidator(), this.longitudeValidator()]
+      description: ['', Validators.required]
     });
     localStorage.setItem("AuthenticationToken","Bearer")
   }
@@ -99,51 +97,88 @@ export class HomepageComponent implements OnInit {
       this.closeModal();
     }
   }
+  
+
+ 
 
   submitForm(): void {
     if (this.incidentForm.valid) {
-      const formData = {
-        latitude: this.incidentForm.value.latitude,
-        longitude: this.incidentForm.value.longitude,
-        type: this.incidentForm.value.type,
-        description: this.incidentForm.value.description,
-        Location: {
-          Latitude: this.incidentForm.value.latitude,
-          Longitude: this.incidentForm.value.longitude
-        },
-        ReportTime: new Date().toISOString()
-      };
-
-      fetch('http://localhost:5240/api/Report', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-      .then(async (response) => {
+      const location = this.incidentForm.value.location.trim();
+      if (location) {
+        // Fetch latitude and longitude from the location
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data && data.length > 0) {
+              const { lat, lon } = data[0];
+              this.submitIncidentReport(parseFloat(lat), parseFloat(lon));
+            } else {
+              alert('Location not found. Please enter a valid location.');
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching location:', error);
+            alert('Failed to fetch coordinates for the location. Please try again.');
+          });
+      } else {
+        alert('Please enter a location.');
+      }
+    } else {
+      console.log('Form is invalid');
+      this.logValidationErrors();
+      this.incidentForm.markAllAsTouched();
+    }
+  }
+  
+  private logValidationErrors(): void {
+    Object.keys(this.incidentForm.controls).forEach(key => {
+      const control = this.incidentForm.get(key);
+      if (control && control.errors) {
+        console.log(`Validation errors for ${key}:`, control.errors);
+      }
+    });
+  }
+  
+  private submitIncidentReport(latitude: number, longitude: number): void {
+    const formData = {
+      latitude,
+      longitude,
+      type: this.incidentForm.value.type,
+      description: this.incidentForm.value.description,
+      Location: {
+        Latitude: latitude,
+        Longitude: longitude,
+      },
+      ReportTime: new Date().toISOString(),
+    };
+  
+    fetch('http://localhost:5240/api/Report', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(async response => {
         const result = await response.json();
         console.log('Server response:', response.status, result);
-
+  
         if (!response.ok) {
           console.error('Validation errors:', result.errors);
           throw new Error(result.title || 'Failed to submit the incident report.');
         }
-
+  
         alert('Report submitted successfully!');
         this.incidentForm.reset();
         this.closeModal();
         window.location.reload();
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('Error submitting report:', error);
         alert('There was an error submitting your report. Please try again.');
       });
-    } else {
-      console.log('Form is invalid');
-      this.incidentForm.markAllAsTouched();
-    }
   }
+  
 
   validateControl(input: string) {
     return this.incidentForm.get(input)?.invalid &&

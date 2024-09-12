@@ -1,14 +1,14 @@
 <!-- articles.component.html -->
 <h2 class="heading">Self Help Articles</h2>
 <div class="container mt-4">
-    <div class="row">
+    <div class="row g-3">
       <div class="col-md-4" *ngFor="let article of articles">
         <div class="card h-100">
           <img [src]="article.imageUrl" class="card-img-top" alt="{{ article.title }}" />
           <div class="card-body">
             <h5 class="card-title">{{ article.title }}</h5>
             <p class="card-text">{{ article.description }}</p>
-            <a [href]="article.link" class="btn btn-primary" target="_blank">Read More</a>
+            <a [href]="article.link" class="button" target="_blank">Read More</a>
           </div>
         </div>
       </div>
