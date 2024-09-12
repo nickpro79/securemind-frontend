@@ -33,7 +33,7 @@ import { CounselorProfilePopupComponent } from './Components/counselor-profile-p
     QuestionnaireComponent,
     RecommendationsComponent,
     ExercisesComponent,
-    CounselorProfilePopupComponent,
+    CounselorProfilePopupComponent
   ],
   imports: [
     BrowserModule,

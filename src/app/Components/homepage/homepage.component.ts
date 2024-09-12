@@ -17,6 +17,7 @@ export class HomepageComponent implements OnInit {
   incidentForm: FormGroup;
   searchMarker?: L.Marker; 
 
+
   constructor(private fb: FormBuilder, private mapService: MapService) {
     
     this.incidentForm = this.fb.group({
