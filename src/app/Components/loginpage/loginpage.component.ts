@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit,EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Login } from '../../Models/login';
@@ -47,6 +48,7 @@ export class LoginpageComponent implements OnInit {
         setTimeout(() => { 
           localStorage.setItem("AuthenticationToken", response.token);
           this._userservice.isAuthenticated = true;
+          this._userservice.login();
           this.router.navigate(['/home']);
           this.isLoading = false; 
         }, 2000); 
@@ -58,6 +60,7 @@ export class LoginpageComponent implements OnInit {
         }, 2000); 
       }
     });
+
   }
 
   get validForm() {

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Modal } from 'bootstrap'; 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 

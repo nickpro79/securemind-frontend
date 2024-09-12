@@ -25,6 +25,7 @@ export class HomepageComponent implements OnInit {
       type: ['', Validators.required],
       description: ['', Validators.required]
     });
+    localStorage.setItem("AuthenticationToken","Bearer")
   }
 
   ngOnInit(): void {
