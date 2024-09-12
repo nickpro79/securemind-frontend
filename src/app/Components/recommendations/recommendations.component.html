@@ -16,7 +16,8 @@
           <strong>Contact Info:</strong> {{ counselor.contactInfo }}
         </p>
       </div>
-      <button class="contact-button">Contact</button>
+      <button class="contact-button" (click)="openCounselorProfile(counselor)">View Profile</button>
+
     </div>
   </li>
 </ul>

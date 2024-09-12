@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CounsellorService } from '../../services/counsellor.service';
 import { MapService } from '../../services/map.service';
+import { CounselorProfilePopupComponent } from '../counselor-profile-popup/counselor-profile-popup.component';
 
 @Component({
   selector: 'app-recommendations',
@@ -15,7 +17,9 @@ export class RecommendationsComponent {
   constructor(
     private route: ActivatedRoute,
     private counsellorService: CounsellorService,
-    private mapService:MapService
+    private mapService:MapService,
+    private dialog: MatDialog
+
   ) {}
 
   ngOnInit() {
@@ -41,5 +45,10 @@ export class RecommendationsComponent {
           }
         });
       });
+  }
+  openCounselorProfile(counselor: any) {
+    this.dialog.open(CounselorProfilePopupComponent, {
+      data: counselor,
+    });
   }
 }
