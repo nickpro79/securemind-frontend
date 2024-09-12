@@ -16,7 +16,6 @@ export class HomepageComponent implements OnInit {
   showModal = false;
   incidentForm: FormGroup;
   searchMarker?: L.Marker; 
-  isLoading: boolean = false; 
 
 
   constructor(private fb: FormBuilder, private mapService: MapService) {

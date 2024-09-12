@@ -19,7 +19,6 @@ import { RecommendationsComponent } from './Components/recommendations/recommend
 import { ExercisesComponent } from './Components/exercises/exercises.component';
 import { authInterceptor } from './interceptor/auth.interceptor';
 import { CounselorProfilePopupComponent } from './Components/counselor-profile-popup/counselor-profile-popup.component';
-import { LoadingComponent } from './Components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +33,7 @@ import { LoadingComponent } from './Components/loading/loading.component';
     QuestionnaireComponent,
     RecommendationsComponent,
     ExercisesComponent,
-    CounselorProfilePopupComponent,
-    LoadingComponent,
+    CounselorProfilePopupComponent
   ],
   imports: [
     BrowserModule,
