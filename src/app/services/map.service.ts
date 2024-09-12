@@ -12,13 +12,20 @@ export class MapService {
   
   constructor() { }
   
-  distanceFromCurrentLocation(lat:number,lon:number)
-  {
-    const distance = getDistance({latitude:this.currentLocation.lat,longitude:this.currentLocation.lon},
-                                  {latitude:lat,longitude:lon})
-    return distance/1000;
-  }
+  distanceFromCurrentLocation(lat: number, lon: number): number {
+    // Check for valid coordinates
+    if (isNaN(lat) || isNaN(lon)) {
+      console.error('Invalid coordinates passed:', lat, lon);
+      return Infinity; // Return a large distance if coordinates are invalid
+    }
 
+    const distance = getDistance(
+      { latitude: this.currentLocation.lat, longitude: this.currentLocation.lon },
+      { latitude: lat, longitude: lon }
+    );
+
+    return distance / 1000;
+  }
  
 
   initMap(containerId: string, center: L.LatLngExpression, zoom: number): void {
