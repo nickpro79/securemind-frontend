@@ -53,7 +53,6 @@ export class QuestionnaireComponent {
 
   nextStep(selectedValue: any = null) {
     if (selectedValue !== null) {
-      console.log('Selected:', selectedValue);
     }
     this.currentStep++;
   }
@@ -82,7 +81,6 @@ export class QuestionnaireComponent {
   onAgeChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     const selectedAge = target?.value;
-    console.log('Selected Age:', selectedAge);
     this.nextStep();
   }
 
@@ -98,7 +96,6 @@ export class QuestionnaireComponent {
   }
 
   determineSpecialization() {
-    console.log('Determining specialization with total score:', this.totalScore);
     if (this.totalScore <= 50) {
       this.specialization = 'Mental Health Counselor';
     } else if (this.totalScore <= 100) {
