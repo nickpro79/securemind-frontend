@@ -15,7 +15,7 @@ export class LoginpageComponent implements OnInit {
     password: ""
   };
   loginForm: FormGroup = null!;
-  isLoading = false; // Add this property
+  isLoading = false; 
   
   constructor(private _userservice: UserService, private Fb: FormBuilder, private router: Router) { }
 

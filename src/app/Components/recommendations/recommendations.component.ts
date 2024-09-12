@@ -13,13 +13,14 @@ import { CounselorProfilePopupComponent } from '../counselor-profile-popup/couns
 export class RecommendationsComponent {
   specialization: string = '';
   counselors: any[] = [];
+  isLoading = true; // Start with loading spinner visible
+  private readonly loadingDelay = 1000; // Delay in milliseconds
 
   constructor(
     private route: ActivatedRoute,
     private counsellorService: CounsellorService,
-    private mapService:MapService,
+    private mapService: MapService,
     private dialog: MatDialog
-
   ) {}
 
   ngOnInit() {
@@ -44,8 +45,13 @@ export class RecommendationsComponent {
             return false;
           }
         });
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, this.loadingDelay);
       });
   }
+
   openCounselorProfile(counselor: any) {
     this.dialog.open(CounselorProfilePopupComponent, {
       data: counselor,

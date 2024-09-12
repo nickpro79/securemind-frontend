@@ -1,5 +1,10 @@
 <h2 class="section-title">Recommended Counselors</h2>
-
+<!-- Loading Spinner -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 <div *ngIf="counselors.length === 0" class="no-counselors-message">
   <p>No counselors available for the selected specialization.</p>
 </div>
