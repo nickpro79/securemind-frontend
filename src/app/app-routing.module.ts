@@ -21,12 +21,12 @@ const routes: Routes = [
   {path:'register',component:RegisterpageComponent},
   {path:'articles', component:ArticlesComponent},
   { path: 'exercises', component: ExercisesComponent }, // Add this line
-  { path: 'questionnaire', component: QuestionnaireComponent },
+  { path: 'questionnaire', component: QuestionnaireComponent,canActivate:[AuthGuard]},
   { path: 'recommendations', component: RecommendationsComponent },
   { path: '', redirectTo: '/questionnaire', pathMatch: 'full' },
   { path: '**', redirectTo: '/questionnaire' }  ,
     {path:'**',component:PagenotfoundComponent},
-  { path: 'counsellors', component: QuestionnaireComponent,canActivate:[AuthGuard] },
+  { path: 'counsellors', component: QuestionnaireComponent},
   {path:'**',component:PagenotfoundComponent}
   
 ];

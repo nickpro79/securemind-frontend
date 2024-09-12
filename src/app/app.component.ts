@@ -1,4 +1,5 @@
 import { Component,OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit {
   isDropdownOpen = false;
   loginText!:string
 
-  constructor(private _userService:UserService){ }
+  constructor(private _userService:UserService,private router:Router){ }
 
   ngOnInit(): void {
     this._userService.isLoggedIn.subscribe(isLoggedIn => {
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
 
   onLogout() {
     this._userService.logout();
+    this.router.navigate(['/home']);
     
   }
 
