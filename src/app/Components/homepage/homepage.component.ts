@@ -105,7 +105,6 @@ export class HomepageComponent implements OnInit {
     if (this.incidentForm.valid) {
       const location = this.incidentForm.value.location.trim();
       if (location) {
-        // Fetch latitude and longitude from the location
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
           .then(response => response.json())
           .then(data => {

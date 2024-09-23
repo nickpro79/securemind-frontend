@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
   toggleDropdown(dropdown: string) {
     if (dropdown === 'nearbyServices') {
       this.isNearbyServicesOpen = !this.isNearbyServicesOpen;
-      this.isResourcesOpen = false; // Close the other dropdown
+      this.isResourcesOpen = false; 
     } else if (dropdown === 'resources') {
       this.isResourcesOpen = !this.isResourcesOpen;
-      this.isNearbyServicesOpen = false; // Close the other dropdown
+      this.isNearbyServicesOpen = false;
     }
   }
   preventClose(event: MouseEvent) {
